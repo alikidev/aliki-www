@@ -10,7 +10,6 @@ import { getAllPosts, getPostAndMorePosts } from '@/lib/api';
 export async function generateStaticParams() {
 	const allPosts = await getAllPosts(false);
 
-	// Return an array of slugs to statically generate the pages
 	return allPosts.map((post) => ({
 		slug: post.slug,
 	}));
