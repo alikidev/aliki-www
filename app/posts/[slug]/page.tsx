@@ -65,7 +65,6 @@ export default async function PostPage({
 					/>
 				</div>
 
-				{/* Date and Author (Mobile view) */}
 				<div className='mx-auto max-w-2xl'>
 					<div className='mb-6 block md:hidden'>
 						{post.author && (
