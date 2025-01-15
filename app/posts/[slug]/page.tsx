@@ -8,7 +8,6 @@ import { Markdown } from '@/lib/markdown';
 import { getAllPosts, getPostAndMorePosts } from '@/lib/api';
 
 export async function generateStaticParams() {
-	// Fetch all posts to generate static params (slugs)
 	const allPosts = await getAllPosts(false);
 
 	// Return an array of slugs to statically generate the pages
