@@ -60,7 +60,6 @@ export default async function PostPage({
 					)}
 				</div>
 
-				{/* Cover Image */}
 				<div className='mb-8 sm:mx-0 md:mb-16'>
 					<CoverImage
 						title={post.title}
