@@ -1,69 +1,101 @@
-import Link from "next/link";
-import { draftMode } from "next/headers";
-
-import MoreStories from "../../more-stories";
-import Avatar from "../../avatar";
-import Date from "../../date";
-import CoverImage from "../../cover-image";
-
-import { Markdown } from "@/lib/markdown";
-import { getAllPosts, getPostAndMorePosts } from "@/lib/api";
+import Link from 'next/link';
+import { draftMode } from 'next/headers';
+import MoreStories from '../../more-stories';
+import Avatar from '../../avatar';
+import Date from '../../date';
+import CoverImage from '../../cover-image';
+import { Markdown } from '@/lib/markdown';
+import { getAllPosts, getPostAndMorePosts } from '@/lib/api';
 
 export async function generateStaticParams() {
-  const allPosts = await getAllPosts(false);
+	// Fetch all posts to generate static params (slugs)
+	const allPosts = await getAllPosts(false);
 
-  return allPosts.map((post) => ({
-    slug: post.slug,
-  }));
+	// Return an array of slugs to statically generate the pages
+	return allPosts.map((post) => ({
+		slug: post.slug,
+	}));
 }
 
 export default async function PostPage({
-  params,
+	params,
 }: {
-  params: { slug: string };
+	params: { slug: string };
 }) {
-  const { isEnabled } = draftMode();
-  const { post, morePosts } = await getPostAndMorePosts(params.slug, isEnabled);
+	const { isEnabled } = await draftMode();
 
-  return (
-    <div className="container mx-auto px-5">
-      <h2 className="mb-20 mt-8 text-2xl font-bold leading-tight tracking-tight md:text-4xl md:tracking-tighter">
-        <Link href="/" className="hover:underline">
-          Blog
-        </Link>
-        .
-      </h2>
-      <article>
-        <h1 className="mb-12 text-center text-6xl font-bold leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl">
-          {post.title}
-        </h1>
-        <div className="hidden md:mb-12 md:block">
-          {post.author && (
-            <Avatar name={post.author.name} picture={post.author.picture} />
-          )}
-        </div>
-        <div className="mb-8 sm:mx-0 md:mb-16">
-          <CoverImage title={post.title} url={post.coverImage.url} />
-        </div>
-        <div className="mx-auto max-w-2xl">
-          <div className="mb-6 block md:hidden">
-            {post.author && (
-              <Avatar name={post.author.name} picture={post.author.picture} />
-            )}
-          </div>
-          <div className="mb-6 text-lg">
-            <Date dateString={post.date} />
-          </div>
-        </div>
+	// Fetch the post and additional posts for the sidebar
+	const { post, morePosts } = await getPostAndMorePosts(params.slug, isEnabled);
 
-        <div className="mx-auto max-w-2xl">
-          <div className="prose">
-            <Markdown content={post.content} />
-          </div>
-        </div>
-      </article>
-      <hr className="border-accent-2 mt-28 mb-24" />
-      <MoreStories morePosts={morePosts} />
-    </div>
-  );
+	if (!post) {
+		// Handle the case where the post is not found
+		return <div>Post not found</div>;
+	}
+
+	return (
+		<div className='container mx-auto px-5'>
+			<h2 className='mb-20 mt-8 text-2xl font-bold leading-tight tracking-tight md:text-4xl md:tracking-tighter'>
+				<Link
+					href='/'
+					className='hover:underline'
+				>
+					Blog
+				</Link>
+				.
+			</h2>
+
+			<article>
+				{/* Post Title */}
+				<h1 className='mb-12 text-center text-6xl font-bold leading-tight tracking-tighter md:text-left md:text-7xl md:leading-none lg:text-8xl'>
+					{post.title}
+				</h1>
+
+				{/* Post Author (Visible on desktop) */}
+				<div className='hidden md:mb-12 md:block'>
+					{post.author && (
+						<Avatar
+							name={post.author.name}
+							picture={post.author.picture}
+						/>
+					)}
+				</div>
+
+				{/* Cover Image */}
+				<div className='mb-8 sm:mx-0 md:mb-16'>
+					<CoverImage
+						title={post.title}
+						url={post.coverImage.url}
+					/>
+				</div>
+
+				{/* Date and Author (Mobile view) */}
+				<div className='mx-auto max-w-2xl'>
+					<div className='mb-6 block md:hidden'>
+						{post.author && (
+							<Avatar
+								name={post.author.name}
+								picture={post.author.picture}
+							/>
+						)}
+					</div>
+					<div className='mb-6 text-lg'>
+						<Date dateString={post.date} />
+					</div>
+				</div>
+
+				{/* Markdown Content */}
+				<div className='mx-auto max-w-2xl'>
+					<div className='prose'>
+						{/* Render post content using Markdown */}
+						<Markdown content={post.content} />
+					</div>
+				</div>
+			</article>
+
+			<hr className='border-accent-2 mt-28 mb-24' />
+
+			{/* More Stories Section */}
+			<MoreStories morePosts={morePosts} />
+		</div>
+	);
 }

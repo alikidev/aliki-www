@@ -1,17 +1,19 @@
 const POST_GRAPHQL_FIELDS = `
   slug
   title
-  coverImage {
-    url
-  }
   date
   author {
-    name
-    picture {
-      url
+    ... on Author {
+      name
+      picture {
+        url
+      }
     }
   }
   excerpt
+  coverImage {
+    url
+  }
   content {
     json
     links {
@@ -29,92 +31,118 @@ const POST_GRAPHQL_FIELDS = `
 `;
 
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
-  return fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${
-          preview
-            ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
-            : process.env.CONTENTFUL_ACCESS_TOKEN
-        }`,
-      },
-      body: JSON.stringify({ query }),
-      next: { tags: ["posts"] },
-    },
-  ).then((response) => response.json());
+	try {
+		const response = await fetch(
+			`https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${
+						preview
+							? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
+							: process.env.CONTENTFUL_ACCESS_TOKEN
+					}`,
+				},
+				body: JSON.stringify({ query }),
+				next: { tags: ['posts'] },
+			},
+		);
+
+		const jsonResponse = await response.json();
+		return jsonResponse;
+	} catch (error) {
+		console.error('Error fetching from Contentful GraphQL API:', error);
+		throw error;
+	}
 }
 
 function extractPost(fetchResponse: any): any {
-  return fetchResponse?.data?.postCollection?.items?.[0];
+	return fetchResponse?.data?.postCollection?.items?.[0];
 }
 
 function extractPostEntries(fetchResponse: any): any[] {
-  return fetchResponse?.data?.postCollection?.items;
+	return fetchResponse?.data?.postCollection?.items || [];
 }
 
 export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
-  const entry = await fetchGraphQL(
-    `query {
+	const query = `
+    query {
       postCollection(where: { slug: "${slug}" }, preview: true, limit: 1) {
         items {
           ${POST_GRAPHQL_FIELDS}
         }
       }
-    }`,
-    true,
-  );
-  return extractPost(entry);
+    }
+  `;
+	const entry = await fetchGraphQL(query, true);
+	return extractPost(entry);
 }
 
 export async function getAllPosts(isDraftMode: boolean): Promise<any[]> {
-  const entries = await fetchGraphQL(
-    `query {
+	const query = `
+    query {
       postCollection(where: { slug_exists: true }, order: date_DESC, preview: ${
-        isDraftMode ? "true" : "false"
-      }) {
+				isDraftMode ? 'true' : 'false'
+			}, limit: 5) { # Limit the results to reduce query complexity
         items {
           ${POST_GRAPHQL_FIELDS}
         }
       }
-    }`,
-    isDraftMode,
-  );
-  return extractPostEntries(entries);
+    }
+  `;
+
+	try {
+		const entries = await fetchGraphQL(query, isDraftMode);
+		const posts = extractPostEntries(entries);
+
+		if (!posts || posts.length === 0) {
+			console.error(
+				'No posts found. Please ensure your Contentful space contains published posts.',
+			);
+			return [];
+		}
+
+		return posts;
+	} catch (error) {
+		console.error('Error fetching posts:', error);
+		return [];
+	}
 }
 
 export async function getPostAndMorePosts(
-  slug: string,
-  preview: boolean,
+	slug: string,
+	preview: boolean,
 ): Promise<any> {
-  const entry = await fetchGraphQL(
-    `query {
+	const postQuery = `
+    query {
       postCollection(where: { slug: "${slug}" }, preview: ${
-        preview ? "true" : "false"
-      }, limit: 1) {
+		preview ? 'true' : 'false'
+	}, limit: 1) {
         items {
           ${POST_GRAPHQL_FIELDS}
         }
       }
-    }`,
-    preview,
-  );
-  const entries = await fetchGraphQL(
-    `query {
+    }
+  `;
+
+	const morePostsQuery = `
+    query {
       postCollection(where: { slug_not_in: "${slug}" }, order: date_DESC, preview: ${
-        preview ? "true" : "false"
-      }, limit: 2) {
+		preview ? 'true' : 'false'
+	}, limit: 2) {
         items {
           ${POST_GRAPHQL_FIELDS}
         }
       }
-    }`,
-    preview,
-  );
-  return {
-    post: extractPost(entry),
-    morePosts: extractPostEntries(entries),
-  };
+    }
+  `;
+
+	const postEntry = await fetchGraphQL(postQuery, preview);
+	const morePostsEntries = await fetchGraphQL(morePostsQuery, preview);
+
+	return {
+		post: extractPost(postEntry),
+		morePosts: extractPostEntries(morePostsEntries),
+	};
 }
