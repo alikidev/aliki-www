@@ -8,10 +8,8 @@ import { Markdown } from '@/lib/markdown';
 import { getAllPosts, getPostAndMorePosts } from '@/lib/api';
 
 export async function generateStaticParams() {
-	// Fetch all posts to generate static params (slugs)
 	const allPosts = await getAllPosts(false);
 
-	// Return an array of slugs to statically generate the pages
 	return allPosts.map((post) => ({
 		slug: post.slug,
 	}));
@@ -67,7 +65,6 @@ export default async function PostPage({
 					/>
 				</div>
 
-				{/* Date and Author (Mobile view) */}
 				<div className='mx-auto max-w-2xl'>
 					<div className='mb-6 block md:hidden'>
 						{post.author && (
