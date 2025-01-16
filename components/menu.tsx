@@ -133,7 +133,7 @@ export default function Example() {
 						Ο χώρος μας
 					</a>
 					<a
-						href='#'
+						href='posts'
 						className='text-sm/6 font-semibold text-gray-900'
 					>
 						Blog
@@ -199,7 +199,7 @@ export default function Example() {
 									Ο χώρος μας
 								</a>
 								<a
-									href='#'
+									href='/posts'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50'
 								>
 									Blog
