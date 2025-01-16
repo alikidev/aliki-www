@@ -13,55 +13,53 @@ import {
 	PopoverPanel,
 } from '@headlessui/react';
 import {
-	ArrowPathIcon,
 	Bars3Icon,
-	ChartPieIcon,
-	CursorArrowRaysIcon,
-	FingerPrintIcon,
-	SquaresPlusIcon,
 	XMarkIcon,
+	ChatBubbleOvalLeftEllipsisIcon,
+	HandRaisedIcon,
+	AcademicCapIcon,
+	UsersIcon,
+	UserGroupIcon,
+	GlobeAltIcon,
+	ClipboardDocumentCheckIcon,
 } from '@heroicons/react/24/outline';
-import {
-	ChevronDownIcon,
-	PhoneIcon,
-	PlayCircleIcon,
-} from '@heroicons/react/20/solid';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 
 const ipiresies = [
 	{
 		name: 'Λογοθεραπεία',
 		href: '#',
-		icon: ChartPieIcon,
+		icon: ChatBubbleOvalLeftEllipsisIcon, // Represents communication and speech.
 	},
 	{
 		name: 'Εργοθεραπεία',
 		href: '#',
-		icon: CursorArrowRaysIcon,
+		icon: HandRaisedIcon, // Represents physical activity and therapy.
 	},
 	{
 		name: 'Ειδική διαπαιδαγώγηση',
 		href: '#',
-		icon: FingerPrintIcon,
+		icon: AcademicCapIcon, // Symbolizes education and learning.
 	},
 	{
 		name: 'Συμβουλευτική γονέων',
 		href: '#',
-		icon: SquaresPlusIcon,
+		icon: UsersIcon, // Represents family or group counseling.
 	},
 	{
 		name: 'Συμβουλευτική εφήβων & ενηλίκων',
 		href: '#',
-		icon: ArrowPathIcon,
+		icon: UserGroupIcon, // A broader group counseling icon.
 	},
 	{
 		name: 'Ομάδες κοινωνικοποίησης',
 		href: '#',
-		icon: ArrowPathIcon,
+		icon: GlobeAltIcon, // Symbolizes social interactions and networks.
 	},
 	{
 		name: 'Σχολική ετοιμότητα',
 		href: '#',
-		icon: ArrowPathIcon,
+		icon: ClipboardDocumentCheckIcon, // Represents readiness and tasks.
 	},
 ];
 
@@ -132,19 +130,19 @@ export default function Example() {
 						href='#'
 						className='text-sm/6 font-semibold text-gray-900'
 					>
-						Features
+						Ο χώρος μας
 					</a>
 					<a
 						href='#'
 						className='text-sm/6 font-semibold text-gray-900'
 					>
-						Marketplace
+						Blog
 					</a>
 					<a
 						href='#'
 						className='text-sm/6 font-semibold text-gray-900'
 					>
-						Company
+						Επικοινωνία
 					</a>
 				</PopoverGroup>
 			</nav>
@@ -155,18 +153,7 @@ export default function Example() {
 			>
 				<div className='fixed inset-0 z-10' />
 				<DialogPanel className='fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
-					<div className='flex items-center justify-between'>
-						<a
-							href='#'
-							className='-m-1.5 p-1.5'
-						>
-							<span className='sr-only'>Your Company</span>
-							<img
-								alt=''
-								src='https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600'
-								className='h-8 w-auto'
-							/>
-						</a>
+					<div className='flex  justify-end'>
 						<button
 							type='button'
 							onClick={() => setMobileMenuOpen(false)}
@@ -209,19 +196,19 @@ export default function Example() {
 									href='#'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50'
 								>
-									Features
+									Ο χώρος μας
 								</a>
 								<a
 									href='#'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50'
 								>
-									Marketplace
+									Blog
 								</a>
 								<a
 									href='#'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50'
 								>
-									Company
+									Επικοινωνία
 								</a>
 							</div>
 						</div>

@@ -19,7 +19,7 @@ const navigation: {
 	social: [
 		{
 			name: 'Twitter',
-			href: 'https://twitter.com/ansub',
+			href: '#',
 			icon: (props: React.SVGProps<SVGSVGElement>) => (
 				<svg
 					fill='currentColor'
@@ -32,7 +32,7 @@ const navigation: {
 		},
 		{
 			name: 'GitHub',
-			href: 'https://github.com/ansub',
+			href: '#',
 			icon: (props: React.SVGProps<SVGSVGElement>) => (
 				<svg
 					fill='currentColor'
@@ -49,7 +49,7 @@ const navigation: {
 		},
 		{
 			name: 'LinkedIn',
-			href: 'https://linkedin.com/in/ansub',
+			href: '#',
 			icon: (props: React.SVGProps<SVGSVGElement>) => (
 				<svg
 					fill='currentColor'
@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
 					))}
 				</div>
 				<p className='mt-6 text-center text-sm text-gray-600 dark:text-gray-100'>
-					&copy; {new Date().getFullYear()} SyntaxUI. All rights reserved.
+					&copy; {new Date().getFullYear()} Sunshine. All rights reserved.
 				</p>
 			</div>
 		</footer>
