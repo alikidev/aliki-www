@@ -1,6 +1,14 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Home, Book, Users, Star } from 'lucide-react';
+import {
+	Home,
+	Book,
+	Users,
+	Star,
+	MapPin,
+	Bus,
+	Accessibility,
+} from 'lucide-react';
 
 export default function AboutOurSpacePage() {
 	return (
@@ -9,11 +17,11 @@ export default function AboutOurSpacePage() {
 			<section className='relative bg-gradient-to-r from-[#71d6a2] to-[#10b981] text-white py-20 md:py-32'>
 				<div className='container mx-auto px-4 md:px-6'>
 					<h1 className='text-4xl md:text-5xl font-bold mb-4 text-center'>
-						About Our Therapy Space
+						Σχετικά με τον Χώρο Θεραπείας μας
 					</h1>
 					<p className='text-xl mb-6 text-center max-w-2xl mx-auto'>
-						Discover a nurturing environment designed to foster communication,
-						growth, and confidence.
+						Ανακαλύψτε ένα περιβάλλον που ενθαρρύνει την επικοινωνία, την
+						ανάπτυξη και την αυτοπεποίθηση.
 					</p>
 				</div>
 			</section>
@@ -22,32 +30,33 @@ export default function AboutOurSpacePage() {
 			<section className='py-16 bg-[#f0fdf4]'>
 				<div className='container mx-auto px-4 md:px-6'>
 					<h2 className='text-3xl font-bold text-center mb-12 text-[#047857]'>
-						Our Space Features
+						Τα Χαρακτηριστικά του Χώρου μας
 					</h2>
 					<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
 						{[
 							{
 								icon: Home,
-								title: 'Welcoming Environment',
+								title: 'Φιλόξενο Περιβάλλον',
 								description:
-									'A warm and inviting space that puts clients at ease.',
+									'Ένας ζεστός και φιλικός χώρος που κάνει τους πελάτες να νιώθουν άνετα.',
 							},
 							{
 								icon: Book,
-								title: 'Resource-Rich',
+								title: 'Πλούσιο σε Πόρους',
 								description:
-									'Equipped with the latest therapy tools and materials.',
+									'Εξοπλισμένο με τα πιο σύγχρονα εργαλεία και υλικά θεραπείας.',
 							},
 							{
 								icon: Users,
-								title: 'Adaptable Rooms',
+								title: 'Προσαρμόσιμα Δωμάτια',
 								description:
-									'Spaces suitable for individual and group sessions.',
+									'Χώροι κατάλληλοι για ατομικές και ομαδικές συνεδρίες.',
 							},
 							{
 								icon: Star,
-								title: 'Sensory-Friendly',
-								description: 'Designed to accommodate various sensory needs.',
+								title: 'Φιλικό προς τις Αισθήσεις',
+								description:
+									'Σχεδιασμένο για να καλύπτει διάφορες αισθητηριακές ανάγκες.',
 							},
 						].map((feature, index) => (
 							<div
@@ -69,19 +78,19 @@ export default function AboutOurSpacePage() {
 			<section className='py-16'>
 				<div className='container mx-auto px-4 md:px-6'>
 					<h2 className='text-3xl font-bold text-center mb-12 text-[#047857]'>
-						Take a Virtual Tour
+						Κάντε μια Εικονική Περιήγηση
 					</h2>
 					<div className='aspect-w-16 aspect-h-9'>
 						<div className='w-full h-[400px] bg-[#bbf7d0] rounded-lg shadow-xl flex items-center justify-center'>
 							<span className='text-[#047857]'>
-								Virtual Tour Video Placeholder
+								Εδώ θα μπει το Βίντεο Εικονικής Περιήγησης
 							</span>
 						</div>
 					</div>
 					<p className='text-center mt-6 text-[#065f46]'>
-						Experience our therapy space from the comfort of your home. This
-						virtual tour showcases our welcoming reception area, cozy therapy
-						rooms, and state-of-the-art equipment.
+						Γνωρίστε τον χώρο θεραπείας μας από την άνεση του σπιτιού σας. Αυτή
+						η εικονική περιήγηση παρουσιάζει τον φιλόξενο χώρο υποδοχής μας, τα
+						άνετα δωμάτια θεραπείας και τον σύγχρονο εξοπλισμό μας.
 					</p>
 				</div>
 			</section>
@@ -90,19 +99,19 @@ export default function AboutOurSpacePage() {
 			<section className='py-16 bg-[#f0fdf4]'>
 				<div className='container mx-auto px-4 md:px-6'>
 					<h2 className='text-3xl font-bold text-center mb-12 text-[#047857]'>
-						What Clients Say About Our Space
+						Τι Λένε οι Πελάτες μας για τον Χώρο μας
 					</h2>
 					<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
 						{[
 							{
-								name: 'Emily R.',
+								name: 'Ελένη Π.',
 								quote:
-									'The calm atmosphere of the therapy room really helps my child focus during sessions.',
+									'Η ήρεμη ατμόσφαιρα του δωματίου θεραπείας βοηθά πραγματικά το παιδί μου να συγκεντρωθεί κατά τη διάρκεια των συνεδριών.',
 							},
 							{
-								name: 'Michael T.',
+								name: 'Μιχάλης Κ.',
 								quote:
-									'I appreciate how the space is designed to be accessible and comfortable for all ages.',
+									'Εκτιμώ πολύ το πώς ο χώρος είναι σχεδιασμένος ώστε να είναι προσβάσιμος και άνετος για όλες τις ηλικίες.',
 							},
 						].map((testimonial, index) => (
 							<div
@@ -125,37 +134,47 @@ export default function AboutOurSpacePage() {
 			<section className='py-16'>
 				<div className='container mx-auto px-4 md:px-6'>
 					<h2 className='text-3xl font-bold text-center mb-12 text-[#047857]'>
-						Location and Accessibility
+						Τοποθεσία και Προσβασιμότητα
 					</h2>
-					<div className='flex flex-col md:flex-row items-center justify-between'>
-						<div className='md:w-1/2 mb-8 md:mb-0'>
-							<div className='w-full h-[300px] bg-[#bbf7d0] rounded-lg shadow-xl flex items-center justify-center'>
-								<span className='text-[#047857]'>Map Placeholder</span>
+					<div className='grid grid-cols-1 md:grid-cols-2 gap-12 items-center'>
+						<div>
+							<div className='space-y-4 mb-8'>
+								<div className='flex items-center'>
+									<MapPin className='w-6 h-6 text-[#10b981] mr-2' />
+									<p className='text-[#065f46]'>
+										Οδός Θεραπείας 123, Πόλη, Τ.Κ. 12345
+									</p>
+								</div>
+								<div className='flex items-center'>
+									<Bus className='w-6 h-6 text-[#10b981] mr-2' />
+									<p className='text-[#065f46]'>
+										Εύκολη πρόσβαση με λεωφορεία και μετρό
+									</p>
+								</div>
+								<div className='flex items-center'>
+									<Accessibility className='w-6 h-6 text-[#10b981] mr-2' />
+									<p className='text-[#065f46]'>
+										Πλήρως προσβάσιμες εγκαταστάσεις
+									</p>
+								</div>
 							</div>
-						</div>
-						<div className='md:w-1/2 md:pl-12'>
-							<h3 className='text-2xl font-semibold mb-4 text-[#059669]'>
-								Easy to Reach
-							</h3>
-							<p className='text-[#065f46] mb-4'>
-								Our therapy space is conveniently located in the heart of the
-								city, easily accessible by public transportation and with ample
-								parking available.
-							</p>
-							<h3 className='text-2xl font-semibold mb-4 text-[#059669]'>
-								Fully Accessible
-							</h3>
-							<p className='text-[#065f46] mb-4'>
-								Our facility is designed to be fully accessible, ensuring a
-								comfortable experience for all our clients, regardless of
-								mobility needs.
-							</p>
 							<Button
 								asChild
 								className='bg-[#10b981] text-white hover:bg-[#059669]'
 							>
-								<Link href='/contact'>Get Directions</Link>
+								<Link href='/contact'>Λάβετε Οδηγίες</Link>
 							</Button>
+						</div>
+						<div className='h-[400px]'>
+							<iframe
+								src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12251.134840150431!2d23.579122900000003!3d38.4594679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a117b03029476f%3A0xb72c8a5db3018a08!2z4oSV4oSV4oSb4oSY4oSS4oSP4oSR4oSJ4oSB4oCg4oSU4oSY4oSN4oSB4oSR4oSV4oSb4oSP4oSX4oCg4oSX4oSR4oSJ4oSS4oSU4oSJ4oSO4oSB4oCg4oSB4oSb4oSJ4oSL4oSY4oCg4oSLg4OCg4oSb4oSP4oSD4oSP4oSI4oSV4oSR4oSB4oSQ4oSV4oSJ4oSB!5e0!3m2!1sen!2sus!4v1629814251749!5m2!1sen!2sus'
+								width='100%'
+								height='100%'
+								style={{ border: 0 }}
+								allowFullScreen={false}
+								loading='lazy'
+								className='rounded-lg shadow-md'
+							></iframe>
 						</div>
 					</div>
 				</div>
@@ -165,18 +184,19 @@ export default function AboutOurSpacePage() {
 			<section className='py-16 bg-[#10b981] text-white'>
 				<div className='container mx-auto px-4 md:px-6 text-center'>
 					<h2 className='text-3xl font-bold mb-6'>
-						Experience Our Space in Person
+						Ζήστε τον Χώρο μας από Κοντά
 					</h2>
 					<p className='text-xl mb-8 max-w-2xl mx-auto'>
-						We'd love to show you around and discuss how our therapy space can
-						support your communication goals.
+						Θα χαρούμε να σας ξεναγήσουμε και να συζητήσουμε πώς ο χώρος
+						θεραπείας μας μπορεί να υποστηρίξει τους επικοινωνιακούς σας
+						στόχους.
 					</p>
 					<Button
 						asChild
 						size='lg'
 						className='bg-white text-[#10b981] hover:bg-[#dcfce7]'
 					>
-						<Link href='/contact'>Schedule a Visit</Link>
+						<Link href='/contact'>Κλείστε μια Επίσκεψη</Link>
 					</Button>
 				</div>
 			</section>

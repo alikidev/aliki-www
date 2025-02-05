@@ -1,32 +1,37 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Smile, Star, Book, Mic } from 'lucide-react';
 
 export default function LandingPage() {
 	return (
 		<main className='flex-1'>
 			{/* Hero Section */}
-			<section className='relative bg-gradient-to-r from-primary-400 to-primary-600 text-white py-20 md:py-32'>
+			<section className='relative bg-gradient-to-r from-[#71d6a2] to-[#10b981] text-white py-20 md:py-32'>
 				<div className='container mx-auto px-4 md:px-6'>
 					<div className='flex flex-col md:flex-row items-center justify-between'>
 						<div className='md:w-1/2 mb-10 md:mb-0'>
 							<h1 className='text-4xl md:text-5xl font-bold mb-4'>
-								Unlock Your Communication Potential
+								Ας Μάθουμε και να Μεγαλώσουμε Μαζί!
 							</h1>
 							<p className='text-xl mb-6'>
-								Expert speech and language therapy to help you or your loved
-								ones communicate with confidence.
+								Διασκεδαστικές περιπέτειες ομιλίας και γλώσσας για καταπληκτικά
+								παιδιά σαν εσένα!
 							</p>
 							<Button
 								asChild
 								size='lg'
-								className='bg-white text-primary-600 hover:bg-primary-100'
+								className='bg-white text-[#10b981] hover:bg-[#f0fdf4] rounded-full text-lg px-8 py-3'
 							>
-								<Link href='#contact'>Book a Consultation</Link>
+								<Link href='#contact'>Ξεκίνα την Περιπέτειά σου!</Link>
 							</Button>
 						</div>
 						<div className='md:w-1/2'>
-							<div className='w-full h-[400px] bg-primary-200 rounded-lg shadow-xl flex items-center justify-center'>
-								<span className='text-primary-800'>Therapist Image</span>
+							<div className='w-full h-[400px] bg-[#f0fdf4] rounded-lg shadow-xl flex items-center justify-center overflow-hidden'>
+								<img
+									src='/placeholder.svg?height=400&width=600'
+									alt='Χαρούμενα παιδιά που μαθαίνουν και παίζουν'
+									className='w-full h-full object-cover'
+								/>
 							</div>
 						</div>
 					</div>
@@ -34,27 +39,42 @@ export default function LandingPage() {
 			</section>
 
 			{/* Services Section */}
-			<section className='py-16 bg-primary-50'>
+			<section className='py-16 bg-[#f0fdf4]'>
 				<div className='container mx-auto px-4 md:px-6'>
-					<h2 className='text-3xl font-bold text-center mb-12 text-primary-800'>
-						Our Services
+					<h2 className='text-3xl font-bold text-center mb-12 text-[#047857]'>
+						Οι Διασκεδαστικές μας Δραστηριότητες Μάθησης
 					</h2>
 					<div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
 						{[
-							'Speech Therapy',
-							'Language Development',
-							'Articulation Disorders',
+							{
+								icon: Smile,
+								title: 'Περιπέτειες Ομιλίας',
+								description:
+									'Συναρπαστικά παιχνίδια για να σε βοηθήσουν να μιλάς καθαρά και με αυτοπεποίθηση!',
+							},
+							{
+								icon: Book,
+								title: 'Αποστολές Γλώσσας',
+								description:
+									'Ανακάλυψε τη μαγεία των λέξεων και εκφράσου καλύτερα!',
+							},
+							{
+								icon: Mic,
+								title: 'Ταξίδια Φωνής',
+								description:
+									'Μάθε να χρησιμοποιείς τη φωνή σου με καταπληκτικούς νέους τρόπους!',
+							},
 						].map((service, index) => (
 							<div
 								key={index}
-								className='bg-white p-6 rounded-lg shadow-md border border-primary-200'
+								className='bg-white p-6 rounded-lg shadow-md border border-[#bbf7d0] transition-transform hover:scale-105'
 							>
-								<h3 className='text-xl font-semibold mb-4 text-primary-700'>
-									{service}
+								<service.icon className='w-16 h-16 text-[#10b981] mb-4 mx-auto' />
+								<h3 className='text-xl font-semibold mb-4 text-[#047857] text-center'>
+									{service.title}
 								</h3>
-								<p className='text-primary-900'>
-									Personalized therapy sessions to improve communication skills
-									and confidence.
+								<p className='text-[#065f46] text-center'>
+									{service.description}
 								</p>
 							</div>
 						))}
@@ -67,29 +87,34 @@ export default function LandingPage() {
 				<div className='container mx-auto px-4 md:px-6'>
 					<div className='flex flex-col md:flex-row items-center'>
 						<div className='md:w-1/2 mb-8 md:mb-0'>
-							<div className='w-full h-[400px] bg-primary-200 rounded-lg shadow-xl flex items-center justify-center'>
-								<span className='text-primary-800'>Therapist Portrait</span>
+							<div className='w-full h-[400px] bg-[#f0fdf4] rounded-lg shadow-xl flex items-center justify-center overflow-hidden'>
+								<img
+									src='/placeholder.svg?height=400&width=600'
+									alt='Η φιλική μας λογοθεραπεύτρια'
+									className='w-full h-full object-cover'
+								/>
 							</div>
 						</div>
 						<div className='md:w-1/2 md:pl-12'>
-							<h2 className='text-3xl font-bold mb-6 text-primary-800'>
-								About Our Therapist
+							<h2 className='text-3xl font-bold mb-6 text-[#047857]'>
+								Γνώρισε τον Φιλικό σου Οδηγό
 							</h2>
-							<p className='text-primary-900 mb-4'>
-								With over 10 years of experience, our certified speech and
-								language therapist is dedicated to helping individuals of all
-								ages overcome communication challenges and reach their full
-								potential.
+							<p className='text-[#065f46] mb-4 text-lg'>
+								Γεια σου! Είμαι η Μαρία και λατρεύω να βοηθάω παιδιά σαν εσένα
+								να γίνουν καταπληκτικοί επικοινωνιακοί. Μαζί, θα πάμε σε
+								συναρπαστικά γλωσσικά ταξίδια γεμάτα διασκεδαστικά παιχνίδια και
+								cool δραστηριότητες!
 							</p>
-							<p className='text-primary-900 mb-6'>
-								Our approach combines evidence-based techniques with
-								compassionate care to ensure the best outcomes for our clients.
+							<p className='text-[#065f46] mb-6 text-lg'>
+								Κάθε μέρα είναι μια νέα περιπέτεια στον πολύχρωμο και
+								παιχνιδιάρικο χώρο θεραπείας μας. Είσαι έτοιμος/η να
+								ξεκλειδώσεις τις υπερδυνάμεις επικοινωνίας σου;
 							</p>
 							<Button
 								variant='outline'
-								className='text-primary-600 border-primary-400 hover:bg-primary-100'
+								className='text-[#10b981] border-[#10b981] hover:bg-[#f0fdf4] rounded-full text-lg px-8 py-3'
 							>
-								Learn More
+								Γνώρισε τη Μαρία
 							</Button>
 						</div>
 					</div>
@@ -97,30 +122,33 @@ export default function LandingPage() {
 			</section>
 
 			{/* Testimonials Section */}
-			<section className='py-16 bg-primary-50'>
+			<section className='py-16 bg-[#f0fdf4]'>
 				<div className='container mx-auto px-4 md:px-6'>
-					<h2 className='text-3xl font-bold text-center mb-12 text-primary-800'>
-						What Our Clients Say
+					<h2 className='text-3xl font-bold text-center mb-12 text-[#047857]'>
+						Τι Λένε τα Σούπερ Αστέρια μας
 					</h2>
 					<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
 						{[
 							{
-								name: 'Sarah M.',
+								name: 'Ελένη, 7 ετών',
 								quote:
-									"The progress my child has made is incredible. We're so grateful for the caring and professional therapy.",
+									'Λατρεύω να έρχομαι εδώ! Τα παιχνίδια είναι τόσο διασκεδαστικά και τώρα μπορώ να λέω καταπληκτικές ιστορίες στους φίλους μου!',
 							},
 							{
-								name: 'John D.',
+								name: 'Η μαμά του Γιάννη',
 								quote:
-									"After my stroke, I didn't think I'd speak normally again. This therapy has been life-changing.",
+									'Η πρόοδος που έχει κάνει ο Γιάννης είναι απίστευτη. Είναι πιο σίγουρος για τον εαυτό του και λατρεύει να εξασκεί την ομιλία του στο σπίτι!',
 							},
 						].map((testimonial, index) => (
 							<div
 								key={index}
-								className='bg-white p-6 rounded-lg shadow-md border border-primary-200'
+								className='bg-white p-6 rounded-lg shadow-md border border-[#bbf7d0]'
 							>
-								<p className='text-primary-900 mb-4'>"{testimonial.quote}"</p>
-								<p className='font-semibold text-primary-700'>
+								<Star className='w-8 h-8 text-[#10b981] mb-4 mx-auto' />
+								<p className='text-[#065f46] mb-4 text-lg italic text-center'>
+									"{testimonial.quote}"
+								</p>
+								<p className='font-semibold text-[#059669] text-center'>
 									{testimonial.name}
 								</p>
 							</div>
@@ -130,21 +158,21 @@ export default function LandingPage() {
 			</section>
 
 			{/* Call to Action Section */}
-			<section className='py-16 bg-primary-600 text-white'>
+			<section className='py-16 bg-[#10b981] text-white'>
 				<div className='container mx-auto px-4 md:px-6 text-center'>
 					<h2 className='text-3xl font-bold mb-6'>
-						Ready to Start Your Journey?
+						Έτοιμος/η για τη Γλωσσική σου Περιπέτεια;
 					</h2>
 					<p className='text-xl mb-8'>
-						Book a consultation today and take the first step towards better
-						communication.
+						Ας ξεκινήσουμε το ταξίδι σου για να γίνεις ένας σούπερ
+						επικοινωνιακός σήμερα!
 					</p>
 					<Button
 						asChild
 						size='lg'
-						className='bg-white text-primary-600 hover:bg-primary-100'
+						className='bg-white text-[#10b981] hover:bg-[#f0fdf4] rounded-full text-lg px-8 py-3'
 					>
-						<Link href='#contact'>Book Now</Link>
+						<Link href='#contact'>Έλα στην Παρέα μας!</Link>
 					</Button>
 				</div>
 			</section>
