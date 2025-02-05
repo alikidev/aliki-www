@@ -139,7 +139,7 @@ export default function Example() {
 						Blog
 					</a>
 					<a
-						href='#'
+						href='contact'
 						className='text-sm/6 font-semibold text-gray-900'
 					>
 						Επικοινωνία
