@@ -127,13 +127,13 @@ export default function Example() {
 					</Popover>
 
 					<a
-						href='#'
+						href='/about-our-space'
 						className='text-sm/6 font-semibold text-gray-900'
 					>
 						Ο χώρος μας
 					</a>
 					<a
-						href='posts'
+						href='/posts'
 						className='text-sm/6 font-semibold text-gray-900'
 					>
 						Blog
@@ -193,7 +193,7 @@ export default function Example() {
 									</DisclosurePanel>
 								</Disclosure>
 								<a
-									href='#'
+									href='/about-our-space'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50'
 								>
 									Ο χώρος μας
@@ -205,7 +205,7 @@ export default function Example() {
 									Blog
 								</a>
 								<a
-									href='#'
+									href='/contact'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50'
 								>
 									Επικοινωνία
