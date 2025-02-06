@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
 	Dialog,
 	DialogPanel,
@@ -25,6 +26,7 @@ import {
 	ClipboardDocumentCheckIcon,
 } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import customImageLoader from '@/app/utils/imageLoader';
 
 const ipiresies = [
 	{
@@ -73,7 +75,24 @@ export default function Menu() {
 				aria-label='Global'
 				className='mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8'
 			>
-				<div className='flex ml-auto lg:hidden'>
+				{/* Logo */}
+				<Link
+					href='/'
+					className='flex items-center'
+				>
+					<Image
+						loader={customImageLoader}
+						src='/public/synapsisLogo.svg'
+						alt='Synapsis Logo'
+						width={180}
+						height={60}
+						className='h-12 w-auto'
+						priority
+					/>
+				</Link>
+
+				{/* Mobile menu button */}
+				<div className='flex lg:hidden'>
 					<button
 						type='button'
 						onClick={() => setMobileMenuOpen(true)}
@@ -86,7 +105,9 @@ export default function Menu() {
 						/>
 					</button>
 				</div>
-				<PopoverGroup className='hidden lg:flex lg:gap-x-12 mx-auto'>
+
+				{/* Desktop menu */}
+				<PopoverGroup className='hidden lg:flex lg:gap-x-12'>
 					<Popover className='relative'>
 						<PopoverButton className='flex items-center gap-x-1 text-sm/6 font-semibold text-[#047857] hover:text-[#10b981]'>
 							Υπηρεσίες
@@ -113,13 +134,13 @@ export default function Menu() {
 											/>
 										</div>
 										<div className='flex-auto'>
-											<a
+											<Link
 												href={item.href}
 												className='block font-semibold text-[#047857] hover:text-[#10b981]'
 											>
 												{item.name}
 												<span className='absolute inset-0' />
-											</a>
+											</Link>
 										</div>
 									</div>
 								))}
@@ -127,26 +148,28 @@ export default function Menu() {
 						</PopoverPanel>
 					</Popover>
 
-					<a
+					<Link
 						href='/about-our-space'
 						className='text-sm/6 font-semibold text-[#047857] hover:text-[#10b981]'
 					>
 						Ο χώρος μας
-					</a>
-					<a
+					</Link>
+					<Link
 						href='/posts'
 						className='text-sm/6 font-semibold text-[#047857] hover:text-[#10b981]'
 					>
 						Blog
-					</a>
-					<a
+					</Link>
+					<Link
 						href='/contact'
 						className='text-sm/6 font-semibold text-[#047857] hover:text-[#10b981]'
 					>
 						Επικοινωνία
-					</a>
+					</Link>
 				</PopoverGroup>
 			</nav>
+
+			{/* Mobile menu */}
 			<Dialog
 				open={mobileMenuOpen}
 				onClose={setMobileMenuOpen}
@@ -154,7 +177,20 @@ export default function Menu() {
 			>
 				<div className='fixed inset-0 z-10' />
 				<DialogPanel className='fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-[#bbf7d0]'>
-					<div className='flex justify-end'>
+					<div className='flex items-center justify-between'>
+						<Link
+							href='/'
+							className='-m-1.5 p-1.5'
+						>
+							<Image
+								src='/synapsis-1.svg'
+								alt='Synapsis Logo'
+								width={180}
+								height={60}
+								className='h-8 w-auto'
+								priority
+							/>
+						</Link>
 						<button
 							type='button'
 							onClick={() => setMobileMenuOpen(false)}
@@ -199,24 +235,24 @@ export default function Menu() {
 										</>
 									)}
 								</Disclosure>
-								<a
+								<Link
 									href='/about-our-space'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-[#047857] hover:bg-[#f0fdf4] hover:text-[#10b981]'
 								>
 									Ο χώρος μας
-								</a>
-								<a
+								</Link>
+								<Link
 									href='/posts'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-[#047857] hover:bg-[#f0fdf4] hover:text-[#10b981]'
 								>
 									Blog
-								</a>
-								<a
+								</Link>
+								<Link
 									href='/contact'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-[#047857] hover:bg-[#f0fdf4] hover:text-[#10b981]'
 								>
 									Επικοινωνία
-								</a>
+								</Link>
 							</div>
 						</div>
 					</div>
