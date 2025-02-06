@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import {
 	Dialog,
 	DialogPanel,
@@ -28,37 +29,37 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 const ipiresies = [
 	{
 		name: 'Λογοθεραπεία',
-		href: '#',
+		href: '/ipiresies/logotherapeia',
 		icon: ChatBubbleOvalLeftEllipsisIcon,
 	},
 	{
 		name: 'Εργοθεραπεία',
-		href: '#',
+		href: '/ipiresies/ergotherapeia',
 		icon: HandRaisedIcon,
 	},
 	{
 		name: 'Ειδική διαπαιδαγώγηση',
-		href: '#',
+		href: '/ipiresies/eidiki-diapaidagogisi',
 		icon: AcademicCapIcon,
 	},
 	{
 		name: 'Συμβουλευτική γονέων',
-		href: '#',
+		href: '/ipiresies/symvouleutiki-goneon',
 		icon: UsersIcon,
 	},
 	{
 		name: 'Συμβουλευτική εφήβων & ενηλίκων',
-		href: '#',
+		href: '/ipiresies/symvouleutiki-efivon-enilikon',
 		icon: UserGroupIcon,
 	},
 	{
 		name: 'Ομάδες κοινωνικοποίησης',
-		href: '#',
+		href: '/ipiresies/omades-koinonikopoiisis',
 		icon: GlobeAltIcon,
 	},
 	{
 		name: 'Σχολική ετοιμότητα',
-		href: '#',
+		href: '/ipiresies/sxoliki-etoimotita',
 		icon: ClipboardDocumentCheckIcon,
 	},
 ];
@@ -186,13 +187,13 @@ export default function Menu() {
 											</DisclosureButton>
 											<DisclosurePanel className='pt-2'>
 												{ipiresies.map((item) => (
-													<a
+													<Link
 														key={item.name}
 														href={item.href}
 														className='mx-3 block rounded-lg px-3 py-2 text-base/7 font-medium text-[#047857] hover:bg-[#f0fdf4] hover:text-[#10b981]'
 													>
 														{item.name}
-													</a>
+													</Link>
 												))}
 											</DisclosurePanel>
 										</>
