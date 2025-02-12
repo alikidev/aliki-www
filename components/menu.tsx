@@ -182,11 +182,11 @@ export default function Menu() {
 							className='-m-1.5 p-1.5'
 						>
 							<Image
-								src='/greentree.svg'
+								src='/greentree.webp'
 								alt='Delivoria Therapy Logo'
 								width={180}
 								height={60}
-								className='h-8 w-auto'
+								className='h-20 w-auto'
 								priority
 								loader={customImageLoader}
 							/>
