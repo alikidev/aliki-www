@@ -82,12 +82,11 @@ export default function Menu() {
 				>
 					<Image
 						loader={customImageLoader}
-						src='/public/synapsisLogo.svg'
-						alt='Synapsis Logo'
+						src='/greentree.webp'
+						alt='Delivoria Therapy Logo'
 						width={180}
 						height={60}
-						className='h-12 w-auto'
-						priority
+						className='h-24 w-auto'
 					/>
 				</Link>
 
