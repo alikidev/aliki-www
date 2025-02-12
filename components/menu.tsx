@@ -182,12 +182,13 @@ export default function Menu() {
 							className='-m-1.5 p-1.5'
 						>
 							<Image
-								src='/synapsis-1.svg'
-								alt='Synapsis Logo'
+								src='/greentree.svg'
+								alt='Delivoria Therapy Logo'
 								width={180}
 								height={60}
 								className='h-8 w-auto'
 								priority
+								loader={customImageLoader}
 							/>
 						</Link>
 						<button
