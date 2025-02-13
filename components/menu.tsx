@@ -81,12 +81,13 @@ export default function Menu() {
 					className='flex items-center'
 				>
 					<Image
-						loader={customImageLoader}
 						src='/greentree.webp'
-						alt='Delivoria Therapy Logo'
+						alt='Synapsis Logo'
 						width={180}
 						height={60}
 						className='h-24 w-auto'
+						loader={customImageLoader}
+						priority
 					/>
 				</Link>
 
@@ -133,13 +134,14 @@ export default function Menu() {
 											/>
 										</div>
 										<div className='flex-auto'>
-											<Link
+											<Popover.Button
+												as={Link}
 												href={item.href}
 												className='block font-semibold text-[#047857] hover:text-[#10b981]'
 											>
 												{item.name}
 												<span className='absolute inset-0' />
-											</Link>
+											</Popover.Button>
 										</div>
 									</div>
 								))}
@@ -187,8 +189,8 @@ export default function Menu() {
 								width={180}
 								height={60}
 								className='h-20 w-auto'
-								priority
 								loader={customImageLoader}
+								priority
 							/>
 						</Link>
 						<button
@@ -227,6 +229,7 @@ export default function Menu() {
 														key={item.name}
 														href={item.href}
 														className='mx-3 block rounded-lg px-3 py-2 text-base/7 font-medium text-[#047857] hover:bg-[#f0fdf4] hover:text-[#10b981]'
+														onClick={() => setMobileMenuOpen(false)}
 													>
 														{item.name}
 													</Link>
@@ -238,18 +241,21 @@ export default function Menu() {
 								<Link
 									href='/about-our-space'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-[#047857] hover:bg-[#f0fdf4] hover:text-[#10b981]'
+									onClick={() => setMobileMenuOpen(false)}
 								>
 									Ο χώρος μας
 								</Link>
 								<Link
 									href='/posts'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-[#047857] hover:bg-[#f0fdf4] hover:text-[#10b981]'
+									onClick={() => setMobileMenuOpen(false)}
 								>
 									Blog
 								</Link>
 								<Link
 									href='/contact'
 									className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-[#047857] hover:bg-[#f0fdf4] hover:text-[#10b981]'
+									onClick={() => setMobileMenuOpen(false)}
 								>
 									Επικοινωνία
 								</Link>
