@@ -85,7 +85,7 @@ export default function Menu() {
 						alt='Delivoria Therapy Logo'
 						width={180}
 						height={60}
-						className='h-22 w-auto'
+						className='h-[90px] w-auto'
 						loader={customImageLoader}
 						priority
 					/>
@@ -188,7 +188,7 @@ export default function Menu() {
 								alt='Delivoria Therapy Logo'
 								width={180}
 								height={60}
-								className='h-22 w-auto'
+								className='h-[90px] w-auto'
 								loader={customImageLoader}
 								priority
 							/>
