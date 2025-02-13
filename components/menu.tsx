@@ -26,10 +26,10 @@ import {
 	ClipboardDocumentCheckIcon,
 } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import { Judson } from 'next/font/google';
+import { Gentium_Plus } from 'next/font/google';
 import customImageLoader from '@/app/utils/imageLoader';
 
-const judson = Judson({
+const judson = Gentium_Plus({
 	weight: ['400', '700'],
 	subsets: ['latin'],
 	display: 'swap',
