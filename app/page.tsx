@@ -6,7 +6,7 @@ export default function LandingPage() {
 	return (
 		<main className='flex-1'>
 			{/* Hero Section */}
-			<section className='relative bg-gradient-to-r from-[#71d6a2] to-[#10b981] text-white py-20 md:py-32'>
+			<section className='relative bg-gradient-to-r from-[#005c25] to-[#005c25] text-white py-20 md:py-32'>
 				<div className='container mx-auto px-4 md:px-6'>
 					<div className='flex flex-col md:flex-row items-center justify-between'>
 						<div className='md:w-1/2 mb-10 md:mb-0'>
