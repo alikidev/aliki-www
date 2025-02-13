@@ -82,7 +82,7 @@ export default function Menu() {
 				>
 					<Image
 						src='/greentree.webp'
-						alt='Synapsis Logo'
+						alt='Delivoria Therapy Logo'
 						width={180}
 						height={60}
 						className='h-24 w-auto'
