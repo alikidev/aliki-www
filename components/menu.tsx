@@ -117,7 +117,7 @@ export default function Menu() {
 					{/* Desktop menu */}
 					<PopoverGroup className='hidden lg:flex lg:gap-x-12'>
 						<Popover className='relative'>
-							<PopoverButton className='flex items-center gap-x-1 text-[17px] font-bold text-white hover:text-[#10b981]'>
+							<PopoverButton className='flex items-center gap-x-1 text-[20px] font-bold text-white hover:text-[#10b981]'>
 								Υπηρεσίες
 								<ChevronDownIcon
 									aria-hidden='true'
@@ -159,19 +159,19 @@ export default function Menu() {
 
 						<Link
 							href='/about-our-space'
-							className='text-[17px] font-bold text-white hover:text-[#10b981]'
+							className='text-[20px] font-bold text-white hover:text-[#10b981]'
 						>
 							Ο χώρος μας
 						</Link>
 						<Link
 							href='/posts'
-							className='text-[17px] font-bold text-white hover:text-[#10b981]'
+							className='text-[20px] font-bold text-white hover:text-[#10b981]'
 						>
 							Blog
 						</Link>
 						<Link
 							href='/contact'
-							className='text-[17px] font-bold text-white hover:text-[#10b981]'
+							className='text-[20px] font-bold text-white hover:text-[#10b981]'
 						>
 							Επικοινωνία
 						</Link>
