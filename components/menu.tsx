@@ -29,7 +29,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Gentium_Plus } from 'next/font/google';
 import customImageLoader from '@/app/utils/imageLoader';
 
-const judson = Gentium_Plus({
+const gentium = Gentium_Plus({
 	weight: ['400', '700'],
 	subsets: ['latin'],
 	display: 'swap',
@@ -77,11 +77,11 @@ export default function Menu() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
 	return (
-		<div className={judson.className}>
-			<header className='bg-[#005c25]'>
+		<div className={gentium.className}>
+			<header className='bg-[#005c25] relative  mx-auto'>
 				<nav
 					aria-label='Global'
-					className='mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8'
+					className='mx-auto flex z-50  container items-center justify-between p-6 '
 				>
 					{/* Logo */}
 					<Link

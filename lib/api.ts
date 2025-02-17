@@ -30,6 +30,34 @@ const POST_GRAPHQL_FIELDS = `
   }
 `;
 
+const PAGE_GRAPHQL_FIELDS = `
+  slug
+  title
+  content {
+    json
+    links {
+      assets {
+        block {
+          sys {
+            id
+          }
+          url
+          description
+        }
+      }
+    }
+  }
+  mainImage {
+    url
+    description
+  }
+  secondaryTitle
+  bulletPoints
+  calloutTitle
+  calloutContent
+  ctaText
+`;
+
 async function fetchGraphQL(query: string, preview = false): Promise<any> {
 	try {
 		const response = await fetch(
@@ -45,7 +73,7 @@ async function fetchGraphQL(query: string, preview = false): Promise<any> {
 					}`,
 				},
 				body: JSON.stringify({ query }),
-				next: { tags: ['posts'] },
+				next: { tags: ['posts', 'pages'] },
 			},
 		);
 
@@ -63,6 +91,10 @@ function extractPost(fetchResponse: any): any {
 
 function extractPostEntries(fetchResponse: any): any[] {
 	return fetchResponse?.data?.postCollection?.items || [];
+}
+
+function extractPage(fetchResponse: any): any {
+	return fetchResponse?.data?.pageCollection?.items?.[0];
 }
 
 export async function getPreviewPostBySlug(slug: string | null): Promise<any> {
@@ -84,7 +116,7 @@ export async function getAllPosts(isDraftMode: boolean): Promise<any[]> {
     query {
       postCollection(where: { slug_exists: true }, order: date_DESC, preview: ${
 				isDraftMode ? 'true' : 'false'
-			}, limit: 5) { # Limit the results to reduce query complexity
+			}, limit: 5) {
         items {
           ${POST_GRAPHQL_FIELDS}
         }
@@ -145,4 +177,24 @@ export async function getPostAndMorePosts(
 		post: extractPost(postEntry),
 		morePosts: extractPostEntries(morePostsEntries),
 	};
+}
+
+export async function getPageData(
+	slug: string,
+	preview: boolean,
+): Promise<any> {
+	const query = `
+    query {
+      pageCollection(where: { slug: "${slug}" }, preview: ${
+		preview ? 'true' : 'false'
+	}, limit: 1) {
+        items {
+          ${PAGE_GRAPHQL_FIELDS}
+        }
+      }
+    }
+  `;
+
+	const pageEntry = await fetchGraphQL(query, preview);
+	return extractPage(pageEntry);
 }

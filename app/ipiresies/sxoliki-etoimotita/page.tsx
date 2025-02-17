@@ -1,100 +1,114 @@
+import { draftMode } from 'next/headers';
+import { getPageData } from '@/lib/api';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import customImageLoader from '../../utils/imageLoader';
 
-export default function SxolikiEtoimotitaPage() {
+const options = {
+	renderNode: {
+		[BLOCKS.PARAGRAPH]: (node: any, children: any) => (
+			<p className='mb-4'>{children}</p>
+		),
+		[BLOCKS.HEADING_1]: (node: any, children: any) => (
+			<h1 className='text-4xl font-bold mb-4'>{children}</h1>
+		),
+		[BLOCKS.HEADING_2]: (node: any, children: any) => (
+			<h2 className='text-3xl font-bold mb-3'>{children}</h2>
+		),
+		[BLOCKS.HEADING_3]: (node: any, children: any) => (
+			<h3 className='text-2xl font-bold mb-2'>{children}</h3>
+		),
+		[BLOCKS.UL_LIST]: (node: any, children: any) => (
+			<ul className='list-disc pl-6 mb-4 space-y-2'>{children}</ul>
+		),
+		[BLOCKS.OL_LIST]: (node: any, children: any) => (
+			<ol className='list-decimal pl-6 mb-4 space-y-2'>{children}</ol>
+		),
+		[BLOCKS.LIST_ITEM]: (node: any, children: any) => (
+			<li className='pl-2'>{children}</li>
+		),
+		[BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+			const { url, description } = node.data.target;
+			return (
+				<Image
+					loader={customImageLoader}
+					src={url || '/placeholder.svg'}
+					alt={description || ''}
+					width={800}
+					height={600}
+					className='rounded-lg w-full h-full object-cover mb-4'
+				/>
+			);
+		},
+	},
+	renderMark: {
+		[MARKS.BOLD]: (text: any) => <strong className='font-bold'>{text}</strong>,
+		[MARKS.ITALIC]: (text: any) => <em className='italic'>{text}</em>,
+		[MARKS.UNDERLINE]: (text: any) => <u className='underline'>{text}</u>,
+	},
+};
+
+export default async function SxolikiEtoimotitaPage() {
+	const { isEnabled: isDraftMode } = draftMode();
+	const pageData = await getPageData('sxoliki-etoimotita', isDraftMode);
+
+	if (!pageData) {
+		return <div>Loading...</div>;
+	}
+
 	return (
 		<div className='container mx-auto px-4 py-8'>
 			<h1 className='text-4xl font-bold text-[#047857] mb-6'>
-				Σχολική Ετοιμότητα
+				{pageData.title}
 			</h1>
 
-			<div className='grid md:grid-cols-2 gap-8 items-center mb-8'>
-				<div>
-					<p className='text-[#065f46] mb-4'>
-						Το πρόγραμμα σχολικής ετοιμότητας στοχεύει στην προετοιμασία των
-						παιδιών για μια ομαλή μετάβαση και επιτυχημένη προσαρμογή στο
-						σχολικό περιβάλλον. Στο κέντρο μας, προσφέρουμε εξατομικευμένα
-						προγράμματα που βοηθούν τα παιδιά να αναπτύξουν τις απαραίτητες
-						δεξιότητες για να ξεκινήσουν το σχολείο με αυτοπεποίθηση και
-						ενθουσιασμό.
-					</p>
+			<div className='grid md:grid-cols-2 gap-8 items-start mb-8'>
+				<div className='prose prose-green max-w-none'>
+					{documentToReactComponents(pageData.content.json, options)}
 				</div>
-				<div className='relative h-64 md:h-96'>
-					<Image
-						loader={customImageLoader}
-						src='https://sjc.microlink.io/vOU9mM_9IWSbm05rMPIvlriFFisO0cznBzTnVvpfTlhgp-_HeU1Mj1A0HB8l666SU82ALLmGJA4z-I7Wux2NkQ.jpeg'
-						alt='Παιδιά σε δραστηριότητα σχολικής ετοιμότητας'
-						fill
-						className='rounded-lg object-cover'
-						sizes='(max-width: 768px) 100vw, 50vw'
-					/>
+				<div className='w-full aspect-[4/3] sticky top-8'>
+					{pageData.mainImage && (
+						<Image
+							loader={customImageLoader}
+							src={pageData.mainImage.url || '/placeholder.svg'}
+							alt={pageData.mainImage.description || ''}
+							width={800}
+							height={600}
+							className='rounded-lg w-full h-full object-cover'
+						/>
+					)}
 				</div>
 			</div>
 
 			<h2 className='text-2xl font-semibold text-[#047857] mb-4'>
-				Τι περιλαμβάνει το πρόγραμμα σχολικής ετοιμότητας;
+				{pageData.secondaryTitle}
 			</h2>
-			<ul className='list-disc list-inside text-[#065f46] mb-6'>
-				<li>
-					Ανάπτυξη προ-ακαδημαϊκών δεξιοτήτων (αναγνώριση γραμμάτων, αριθμών,
-					σχημάτων, χρωμάτων)
-				</li>
-				<li>Ενίσχυση γλωσσικών δεξιοτήτων και εμπλουτισμός λεξιλογίου</li>
-				<li>Καλλιέργεια λεπτής κινητικότητας για γραφή και ζωγραφική</li>
-				<li>Ανάπτυξη κοινωνικών δεξιοτήτων και συναισθηματικής νοημοσύνης</li>
-				<li>Εξάσκηση στην ακολουθία οδηγιών και ρουτινών</li>
-				<li>Ενίσχυση της συγκέντρωσης και της προσοχής</li>
-				<li>Προώθηση της αυτονομίας και της αυτοεξυπηρέτησης</li>
+			<ul className='list-disc pl-6 text-[#065f46] mb-6 space-y-2'>
+				{pageData.bulletPoints.map((point: string, index: number) => (
+					<li
+						key={index}
+						className='pl-2'
+					>
+						{point}
+					</li>
+				))}
 			</ul>
 
 			<div className='bg-[#f0fdf4] p-6 rounded-lg mb-8'>
 				<h3 className='text-xl font-semibold text-[#047857] mb-3'>
-					Η προσέγγισή μας
+					{pageData.calloutTitle}
 				</h3>
-				<p className='text-[#065f46] mb-4'>
-					Το πρόγραμμά μας βασίζεται σε παιγνιώδεις και διαδραστικές μεθόδους
-					μάθησης, προσαρμοσμένες στις ανάγκες και τα ενδιαφέροντα κάθε παιδιού.
-					Οι έμπειροι παιδαγωγοί μας δημιουργούν ένα υποστηρικτικό περιβάλλον
-					που ενθαρρύνει την εξερεύνηση, τη δημιουργικότητα και την ανάπτυξη
-					δεξιοτήτων απαραίτητων για τη σχολική επιτυχία.
-				</p>
-			</div>
-
-			<div className='grid md:grid-cols-2 gap-8 items-center mb-8'>
-				<div className='relative h-64 md:h-96'>
-					<Image
-						loader={customImageLoader}
-						src='https://sjc.microlink.io/vOU9mM_9IWSbm05rMPIvlriFFisO0cznBzTnVvpfTlhgp-_HeU1Mj1A0HB8l666SU82ALLmGJA4z-I7Wux2NkQ.jpeg'
-						alt='Παιδί που εξασκείται στη γραφή'
-						fill
-						className='rounded-lg object-cover'
-						sizes='(max-width: 768px) 100vw, 50vw'
-					/>
-				</div>
-				<div>
-					<h3 className='text-xl font-semibold text-[#047857] mb-3'>
-						Οφέλη του προγράμματος
-					</h3>
-					<p className='text-[#065f46] mb-4'>
-						Η συμμετοχή στο πρόγραμμα σχολικής ετοιμότητας προσφέρει πολλαπλά
-						οφέλη στα παιδιά. Ενισχύει την αυτοπεποίθησή τους, αναπτύσσει
-						βασικές δεξιότητες μάθησης, και τα βοηθά να προσαρμοστούν πιο εύκολα
-						στο σχολικό περιβάλλον. Επιπλέον, προωθεί τη θετική στάση απέναντι
-						στη μάθηση, θέτοντας γερές βάσεις για τη μελλοντική ακαδημαϊκή
-						επιτυχία.
-					</p>
-				</div>
+				<p className='text-[#065f46] mb-4'>{pageData.calloutContent}</p>
 			</div>
 
 			<Button
 				asChild
 				className='bg-[#10b981] hover:bg-[#059669] text-white'
 			>
-				<Link href='/contact'>
-					Εγγραφείτε στο πρόγραμμα σχολικής ετοιμότητας
-				</Link>
+				<Link href='/contact'>{pageData.ctaText}</Link>
 			</Button>
 		</div>
 	);

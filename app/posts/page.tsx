@@ -13,7 +13,7 @@ export default async function Page() {
 	}
 
 	return (
-		<div className='container mx-auto px-5'>
+		<div className='container mx-auto pt-6 px-5'>
 			<h1 className='text-4xl md:text-5xl font-bold text-center mb-12 text-[#047857]'>
 				Our Blog
 			</h1>

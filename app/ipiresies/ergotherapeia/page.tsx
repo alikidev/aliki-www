@@ -1,90 +1,114 @@
+import { draftMode } from 'next/headers';
+import { getPageData } from '@/lib/api';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import customImageLoader from '../../utils/imageLoader';
 
-export default function ErgotherapeiaPage() {
+const options = {
+	renderNode: {
+		[BLOCKS.PARAGRAPH]: (node: any, children: any) => (
+			<p className='mb-4'>{children}</p>
+		),
+		[BLOCKS.HEADING_1]: (node: any, children: any) => (
+			<h1 className='text-4xl font-bold mb-4'>{children}</h1>
+		),
+		[BLOCKS.HEADING_2]: (node: any, children: any) => (
+			<h2 className='text-3xl font-bold mb-3'>{children}</h2>
+		),
+		[BLOCKS.HEADING_3]: (node: any, children: any) => (
+			<h3 className='text-2xl font-bold mb-2'>{children}</h3>
+		),
+		[BLOCKS.UL_LIST]: (node: any, children: any) => (
+			<ul className='list-disc pl-6 mb-4 space-y-2'>{children}</ul>
+		),
+		[BLOCKS.OL_LIST]: (node: any, children: any) => (
+			<ol className='list-decimal pl-6 mb-4 space-y-2'>{children}</ol>
+		),
+		[BLOCKS.LIST_ITEM]: (node: any, children: any) => (
+			<li className='pl-2'>{children}</li>
+		),
+		[BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+			const { url, description } = node.data.target;
+			return (
+				<Image
+					loader={customImageLoader}
+					src={url || '/placeholder.svg'}
+					alt={description || ''}
+					width={800}
+					height={600}
+					className='rounded-lg w-full h-full object-cover mb-4'
+				/>
+			);
+		},
+	},
+	renderMark: {
+		[MARKS.BOLD]: (text: any) => <strong className='font-bold'>{text}</strong>,
+		[MARKS.ITALIC]: (text: any) => <em className='italic'>{text}</em>,
+		[MARKS.UNDERLINE]: (text: any) => <u className='underline'>{text}</u>,
+	},
+};
+
+export default async function ErgotherapeiaPage() {
+	const { isEnabled: isDraftMode } = draftMode();
+	const pageData = await getPageData('ergotherapeia', isDraftMode);
+
+	if (!pageData) {
+		return <div>Loading...</div>;
+	}
+
 	return (
 		<div className='container mx-auto px-4 py-8'>
-			<h1 className='text-4xl font-bold text-[#047857] mb-6'>Εργοθεραπεία</h1>
+			<h1 className='text-4xl font-bold text-[#047857] mb-6'>
+				{pageData.title}
+			</h1>
 
-			<div className='grid md:grid-cols-2 gap-8 items-center mb-8'>
-				<div>
-					<p className='text-[#065f46] mb-4'>
-						Η εργοθεραπεία είναι μια θεραπευτική προσέγγιση που στοχεύει στην
-						ενίσχυση της ικανότητας των ατόμων να συμμετέχουν σε καθημερινές
-						δραστηριότητες. Στο κέντρο μας, προσφέρουμε εξατομικευμένες
-						συνεδρίες εργοθεραπείας για παιδιά και ενήλικες, βοηθώντας τους να
-						αναπτύξουν, να ανακτήσουν ή να διατηρήσουν δεξιότητες που είναι
-						σημαντικές για την ανεξάρτητη λειτουργία και την ευημερία τους.
-					</p>
+			<div className='grid md:grid-cols-2 gap-8 items-start mb-8'>
+				<div className='prose prose-green max-w-none'>
+					{documentToReactComponents(pageData.content.json, options)}
 				</div>
-				<div className='relative h-64 md:h-96'>
-					<Image
-						loader={customImageLoader}
-						src='https://sjc.microlink.io/vOU9mM_9IWSbm05rMPIvlriFFisO0cznBzTnVvpfTlhgp-_HeU1Mj1A0HB8l666SU82ALLmGJA4z-I7Wux2NkQ.jpeg'
-						alt='Εργοθεραπεία σε εξέλιξη'
-						fill
-						className='rounded-lg object-cover'
-						sizes='(max-width: 768px) 100vw, 50vw'
-					/>
+				<div className='w-full aspect-[4/3] sticky top-8'>
+					{pageData.mainImage && (
+						<Image
+							loader={customImageLoader}
+							src={pageData.mainImage.url || '/placeholder.svg'}
+							alt={pageData.mainImage.description || ''}
+							width={800}
+							height={600}
+							className='rounded-lg w-full h-full object-cover'
+						/>
+					)}
 				</div>
 			</div>
 
 			<h2 className='text-2xl font-semibold text-[#047857] mb-4'>
-				Τι περιλαμβάνει η εργοθεραπεία;
+				{pageData.secondaryTitle}
 			</h2>
-			<ul className='list-disc list-inside text-[#065f46] mb-6'>
-				<li>Αξιολόγηση των κινητικών και αισθητηριακών δεξιοτήτων</li>
-				<li>Ανάπτυξη λεπτής και αδρής κινητικότητας</li>
-				<li>Βελτίωση των δεξιοτήτων καθημερινής διαβίωσης</li>
-				<li>Αισθητηριακή ολοκλήρωση</li>
-				<li>Προσαρμογή του περιβάλλοντος για καλύτερη λειτουργικότητα</li>
-				<li>Υποστήριξη στην ανάπτυξη κοινωνικών δεξιοτήτων</li>
+			<ul className='list-disc pl-6 text-[#065f46] mb-6 space-y-2'>
+				{pageData.bulletPoints.map((point: string, index: number) => (
+					<li
+						key={index}
+						className='pl-2'
+					>
+						{point}
+					</li>
+				))}
 			</ul>
 
 			<div className='bg-[#f0fdf4] p-6 rounded-lg mb-8'>
 				<h3 className='text-xl font-semibold text-[#047857] mb-3'>
-					Η προσέγγισή μας
+					{pageData.calloutTitle}
 				</h3>
-				<p className='text-[#065f46] mb-4'>
-					Οι εργοθεραπευτές μας χρησιμοποιούν μια ολιστική προσέγγιση,
-					λαμβάνοντας υπόψη τις φυσικές, συναισθηματικές και κοινωνικές ανάγκες
-					κάθε ατόμου. Στόχος μας είναι να βοηθήσουμε τους πελάτες μας να
-					επιτύχουν τη μέγιστη ανεξαρτησία και ποιότητα ζωής.
-				</p>
-			</div>
-
-			<div className='grid md:grid-cols-2 gap-8 items-center mb-8'>
-				<div className='relative h-64 md:h-96'>
-					<Image
-						loader={customImageLoader}
-						src='https://sjc.microlink.io/vOU9mM_9IWSbm05rMPIvlriFFisO0cznBzTnVvpfTlhgp-_HeU1Mj1A0HB8l666SU82ALLmGJA4z-I7Wux2NkQ.jpeg'
-						alt='Εξοπλισμός εργοθεραπείας'
-						fill
-						className='rounded-lg object-cover'
-						sizes='(max-width: 768px) 100vw, 50vw'
-					/>
-				</div>
-				<div>
-					<h3 className='text-xl font-semibold text-[#047857] mb-3'>
-						Ο εξοπλισμός μας
-					</h3>
-					<p className='text-[#065f46] mb-4'>
-						Το κέντρο μας είναι εξοπλισμένο με σύγχρονα εργαλεία και υλικά
-						εργοθεραπείας, επιτρέποντάς μας να προσφέρουμε ένα ευρύ φάσμα
-						θεραπευτικών δραστηριοτήτων. Από ειδικά σχεδιασμένα παιχνίδια μέχρι
-						εξοπλισμό αισθητηριακής ολοκλήρωσης, έχουμε όλα όσα χρειάζονται για
-						να υποστηρίξουμε την πρόοδο των πελατών μας.
-					</p>
-				</div>
+				<p className='text-[#065f46] mb-4'>{pageData.calloutContent}</p>
 			</div>
 
 			<Button
 				asChild
 				className='bg-[#10b981] hover:bg-[#059669] text-white'
 			>
-				<Link href='/contact'>Κλείστε ραντεβού για αξιολόγηση</Link>
+				<Link href='/contact'>{pageData.ctaText}</Link>
 			</Button>
 		</div>
 	);

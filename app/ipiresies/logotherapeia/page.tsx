@@ -1,70 +1,109 @@
+import { draftMode } from 'next/headers';
+import { getPageData } from '@/lib/api';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import customImageLoader from '../../utils/imageLoader';
 
-export default function LogotherapeiaPage() {
+const options = {
+	renderNode: {
+		[BLOCKS.PARAGRAPH]: (node: any, children: any) => (
+			<p className='mb-4'>{children}</p>
+		),
+		[BLOCKS.HEADING_1]: (node: any, children: any) => (
+			<h1 className='text-4xl font-bold mb-4'>{children}</h1>
+		),
+		[BLOCKS.HEADING_2]: (node: any, children: any) => (
+			<h2 className='text-3xl font-bold mb-3'>{children}</h2>
+		),
+		[BLOCKS.HEADING_3]: (node: any, children: any) => (
+			<h3 className='text-2xl font-bold mb-2'>{children}</h3>
+		),
+		[BLOCKS.UL_LIST]: (node: any, children: any) => (
+			<ul className='list-disc list-inside mb-4'>{children}</ul>
+		),
+		[BLOCKS.OL_LIST]: (node: any, children: any) => (
+			<ol className='list-decimal pl-6 mb-4 space-y-2'>{children}</ol>
+		),
+		[BLOCKS.LIST_ITEM]: (node: any, children: any) => (
+			<li className='mb-1'>{children}</li>
+		),
+		[BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+			const { url, description } = node.data.target;
+			return (
+				<Image
+					loader={customImageLoader}
+					src={url || '/placeholder.svg'}
+					alt={description || ''}
+					width={800}
+					height={600}
+					className='rounded-lg w-full h-full object-cover mb-4'
+				/>
+			);
+		},
+	},
+	renderMark: {
+		[MARKS.BOLD]: (text: any) => <strong className='font-bold'>{text}</strong>,
+		[MARKS.ITALIC]: (text: any) => <em className='italic'>{text}</em>,
+		[MARKS.UNDERLINE]: (text: any) => <u className='underline'>{text}</u>,
+	},
+};
+
+export default async function LogotherapeiaPage() {
+	const { isEnabled: isDraftMode } = draftMode();
+	const pageData = await getPageData('logotherapeia', isDraftMode);
+
+	if (!pageData) {
+		return <div>Loading...</div>;
+	}
+
 	return (
 		<div className='container mx-auto px-4 py-8'>
-			<h1 className='text-4xl font-bold text-[#047857] mb-6'>Λογοθεραπεία</h1>
+			<h1 className='text-4xl font-bold text-[#047857] mb-6'>
+				{pageData.title}
+			</h1>
 
-			<div className='grid md:grid-cols-2 gap-8 items-center mb-8'>
-				<div>
-					<p className='text-[#065f46] mb-4'>
-						Η λογοθεραπεία είναι μια εξειδικευμένη θεραπευτική προσέγγιση που
-						στοχεύει στη βελτίωση της επικοινωνίας και της ομιλίας. Στο κέντρο
-						μας, προσφέρουμε εξατομικευμένες συνεδρίες λογοθεραπείας για παιδιά
-						και ενήλικες, αντιμετωπίζοντας ένα ευρύ φάσμα διαταραχών ομιλίας και
-						γλώσσας.
-					</p>
-					<p className='text-[#065f46] mb-4'>
-						Οι έμπειροι λογοθεραπευτές μας χρησιμοποιούν σύγχρονες τεχνικές και
-						εργαλεία για να βοηθήσουν τους πελάτες μας να ξεπεράσουν δυσκολίες
-						στην άρθρωση, τη ροή της ομιλίας, την κατανόηση και την έκφραση της
-						γλώσσας.
-					</p>
+			<div className='grid md:grid-cols-2 gap-8 items-start mb-8'>
+				<div className='prose prose-green max-w-none'>
+					{documentToReactComponents(pageData.content.json, options)}
 				</div>
-				<div className='w-full aspect-[4/3]'>
-					<Image
-						loader={customImageLoader}
-						src='https://sjc.microlink.io/vOU9mM_9IWSbm05rMPIvlriFFisO0cznBzTnVvpfTlhgp-_HeU1Mj1A0HB8l666SU82ALLmGJA4z-I7Wux2NkQ.jpeg'
-						alt='Λογοθεραπεία σε εξέλιξη'
-						width={800}
-						height={600}
-						className='rounded-lg w-full h-full object-cover'
-					/>
+				<div className='w-full aspect-[4/3] sticky top-8'>
+					{pageData.mainImage && (
+						<Image
+							loader={customImageLoader}
+							src={pageData.mainImage.url || '/placeholder.svg'}
+							alt={pageData.mainImage.description || ''}
+							width={800}
+							height={600}
+							className='rounded-lg w-full h-full object-cover'
+						/>
+					)}
 				</div>
 			</div>
 
 			<h2 className='text-2xl font-semibold text-[#047857] mb-4'>
-				Τι περιλαμβάνει η λογοθεραπεία;
+				{pageData.secondaryTitle}
 			</h2>
 			<ul className='list-disc list-inside text-[#065f46] mb-6'>
-				<li>Αξιολόγηση και διάγνωση διαταραχών ομιλίας και γλώσσας</li>
-				<li>Εξατομικευμένα προγράμματα θεραπείας</li>
-				<li>Ασκήσεις άρθρωσης και φωνολογίας</li>
-				<li>Τεχνικές βελτίωσης της ροής της ομιλίας</li>
-				<li>Ενίσχυση των γλωσσικών δεξιοτήτων</li>
-				<li>Υποστήριξη σε δυσκολίες κατάποσης</li>
+				{pageData.bulletPoints.map((point: string, index: number) => (
+					<li key={index}>{point}</li>
+				))}
 			</ul>
 
 			<div className='bg-[#f0fdf4] p-6 rounded-lg mb-8'>
 				<h3 className='text-xl font-semibold text-[#047857] mb-3'>
-					Γιατί να επιλέξετε εμάς;
+					{pageData.calloutTitle}
 				</h3>
-				<p className='text-[#065f46] mb-4'>
-					Στο κέντρο μας, προσφέρουμε ένα υποστηρικτικό και φιλικό περιβάλλον
-					όπου κάθε άτομο λαμβάνει εξατομικευμένη φροντίδα. Οι θεραπευτές μας
-					είναι πλήρως καταρτισμένοι και χρησιμοποιούν τις πιο σύγχρονες
-					μεθόδους λογοθεραπείας.
-				</p>
+				<p className='text-[#065f46] mb-4'>{pageData.calloutContent}</p>
 			</div>
 
 			<Button
 				asChild
 				className='bg-[#10b981] hover:bg-[#059669] text-white'
 			>
-				<Link href='/contact'>Κλείστε ραντεβού για αξιολόγηση</Link>
+				<Link href='/contact'>{pageData.ctaText}</Link>
 			</Button>
 		</div>
 	);

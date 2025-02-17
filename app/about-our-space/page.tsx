@@ -14,7 +14,7 @@ export default function AboutOurSpacePage() {
 	return (
 		<main className='flex-1'>
 			{/* Hero Section */}
-			<section className='relative bg-gradient-to-r from-[#71d6a2] to-[#10b981] text-white py-20 md:py-32'>
+			<section className='relative bg-gradient-to-r from-[#005c25] to-[#005c25] text-white py-20 md:py-32'>
 				<div className='container mx-auto px-4 md:px-6'>
 					<h1 className='text-4xl md:text-5xl font-bold mb-4 text-center'>
 						Σχετικά με τον Χώρο Θεραπείας μας
