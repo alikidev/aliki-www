@@ -1,14 +1,15 @@
+import type React from 'react';
 import './globals.css';
-import { Gentium_Plus } from 'next/font/google';
-import { EXAMPLE_PATH, CMS_NAME } from '@/lib/constants';
+import { Judson } from 'next/font/google';
 import Footer from '../components/footer';
 import Menu from '../components/menu';
+
 export const metadata = {
-	title: `Next.js and ${CMS_NAME} Example`,
-	description: `This is a blog built with Next.js and ${CMS_NAME}.`,
+	title: `Delivoria Therapy - Κέντρο Λογοθεραπείας και Ειδικής Αγωγής`,
+	description: `Εξειδικευμένες υπηρεσίες λογοθεραπείας και ειδικής αγωγής για παιδιά και ενήλικες.`,
 };
 
-const gentium = Gentium_Plus({
+const judson = Judson({
 	weight: ['400', '700'],
 	subsets: ['latin'],
 	display: 'swap',
@@ -21,13 +22,13 @@ export default function RootLayout({
 }) {
 	return (
 		<html
-			lang='en'
-			className={gentium.className}
+			lang='el'
+			className={judson.className}
 		>
-			<body>
-				<section className='min-h-screen'>
+			<body className='bg-white text-primary-700'>
+				<section className='min-h-screen flex flex-col'>
 					<Menu />
-					<main>{children}</main>
+					<main className='flex-grow'>{children}</main>
 					<Footer />
 				</section>
 			</body>

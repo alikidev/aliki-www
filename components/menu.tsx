@@ -90,7 +90,7 @@ export default function Menu() {
 					>
 						<Image
 							src='/delivoriakidsandfamilytherapylogo.webp'
-							alt='Synapsis Logo'
+							alt='Delivoria Therapy Logo'
 							width={180}
 							height={60}
 							className='h-[90px] w-auto'
@@ -99,12 +99,11 @@ export default function Menu() {
 						/>
 					</Link>
 
-					{/* Mobile menu button */}
 					<div className='flex lg:hidden'>
 						<button
 							type='button'
 							onClick={() => setMobileMenuOpen(true)}
-							className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white hover:text-[#10b981]'
+							className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white hover:text-primary-100'
 						>
 							<span className='sr-only'>Open main menu</span>
 							<Bars3Icon
@@ -117,35 +116,35 @@ export default function Menu() {
 					{/* Desktop menu */}
 					<PopoverGroup className='hidden lg:flex lg:gap-x-12'>
 						<Popover className='relative'>
-							<PopoverButton className='flex items-center gap-x-1 text-[20px] font-bold text-white hover:text-[#10b981]'>
+							<PopoverButton className='flex items-center gap-x-1 text-[18px] font-bold text-white hover:text-primary-100'>
 								Υπηρεσίες
 								<ChevronDownIcon
 									aria-hidden='true'
-									className='size-5 flex-none text-white'
+									className='size-5 flex-none text-primary-400'
 								/>
 							</PopoverButton>
 
 							<PopoverPanel
 								transition
-								className='absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-[#bbf7d0] transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in'
+								className='absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-primary-100 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in'
 							>
 								<div className='p-4'>
 									{ipiresies.map((item) => (
 										<div
 											key={item.name}
-											className='group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-[#f0fdf4]'
+											className='group relative flex items-center gap-x-6 rounded-lg p-4 text-[16px] hover:bg-primary-50'
 										>
-											<div className='flex size-11 flex-none items-center justify-center rounded-lg bg-[#f0fdf4] group-hover:bg-white'>
+											<div className='flex size-11 flex-none items-center justify-center rounded-lg bg-primary-50 group-hover:bg-white'>
 												<item.icon
 													aria-hidden='true'
-													className='size-6 text-[#047857] group-hover:text-[#10b981]'
+													className='size-6 text-primary group-hover:text-primary-600'
 												/>
 											</div>
 											<div className='flex-auto'>
 												<Popover.Button
 													as={Link}
 													href={item.href}
-													className='block font-semibold text-[#047857] hover:text-[#10b981]'
+													className='block font-semibold text-primary hover:text-primary-600'
 												>
 													{item.name}
 													<span className='absolute inset-0' />
@@ -159,19 +158,19 @@ export default function Menu() {
 
 						<Link
 							href='/about-our-space'
-							className='text-[20px] font-bold text-white hover:text-[#10b981]'
+							className='text-[18px] font-bold text-white hover:text-primary-100'
 						>
 							Ο χώρος μας
 						</Link>
 						<Link
 							href='/posts'
-							className='text-[20px] font-bold text-white hover:text-[#10b981]'
+							className='text-[18px] font-bold text-white hover:text-primary-100'
 						>
 							Blog
 						</Link>
 						<Link
 							href='/contact'
-							className='text-[20px] font-bold text-white hover:text-[#10b981]'
+							className='text-[18px] font-bold text-white hover:text-primary-100'
 						>
 							Επικοινωνία
 						</Link>
@@ -222,11 +221,11 @@ export default function Menu() {
 									>
 										{({ open }) => (
 											<>
-												<DisclosureButton className='group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base/7 font-bold text-[#047857] hover:bg-[#f0fdf4]'>
+												<DisclosureButton className='group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base/7 font-bold text-primary hover:bg-primary-50'>
 													Υπηρεσίες
 													<ChevronDownIcon
 														aria-hidden='true'
-														className={`size-5 flex-none text-[#10b981] transition-transform duration-200 ${
+														className={`size-5 flex-none text-primary-600 transition-transform duration-200 ${
 															open ? 'rotate-180' : ''
 														}`}
 													/>
@@ -236,7 +235,7 @@ export default function Menu() {
 														<Link
 															key={item.name}
 															href={item.href}
-															className='mx-3 block rounded-lg px-3 py-2 text-base/7 font-medium text-[#047857] hover:bg-[#f0fdf4] hover:text-[#10b981]'
+															className='mx-3 block rounded-lg px-3 py-2 text-base/7 font-medium text-primary hover:bg-primary-50 hover:text-primary-600'
 															onClick={() => setMobileMenuOpen(false)}
 														>
 															{item.name}
@@ -248,21 +247,21 @@ export default function Menu() {
 									</Disclosure>
 									<Link
 										href='/about-our-space'
-										className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-[#047857] hover:bg-[#f0fdf4] hover:text-[#10b981]'
+										className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-primary hover:bg-primary-50 hover:text-primary-600'
 										onClick={() => setMobileMenuOpen(false)}
 									>
 										Ο χώρος μας
 									</Link>
 									<Link
 										href='/posts'
-										className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-[#047857] hover:bg-[#f0fdf4] hover:text-[#10b981]'
+										className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-primary hover:bg-primary-50 hover:text-primary-600'
 										onClick={() => setMobileMenuOpen(false)}
 									>
 										Blog
 									</Link>
 									<Link
 										href='/contact'
-										className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-[#047857] hover:bg-[#f0fdf4] hover:text-[#10b981]'
+										className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-bold text-primary hover:bg-primary-50 hover:text-primary-600'
 										onClick={() => setMobileMenuOpen(false)}
 									>
 										Επικοινωνία

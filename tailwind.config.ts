@@ -7,6 +7,7 @@ module.exports = {
 		'./components/**/*.{js,ts,jsx,tsx,mdx}',
 		'app/**/*.{ts,tsx}',
 		'components/**/*.{ts,tsx}',
+		'*.{js,ts,jsx,tsx,mdx}',
 	],
 	theme: {
 		extend: {
@@ -17,23 +18,22 @@ module.exports = {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))',
-					50: '#f0fdf4',
-					100: '#dcfce7',
-					200: '#bbf7d0',
-					300: '#86efac',
-					400: '#71d6a2',
-					500: '#34d399',
-					600: '#10b981',
-					700: '#059669',
-					800: '#047857',
-					900: '#065f46',
-					950: '#064e3b',
+					DEFAULT: '#005c25',
+					foreground: '#ffffff',
+					50: '#e6f4eb',
+					100: '#cce9d7',
+					200: '#99d3af',
+					300: '#66bd87',
+					400: '#33a75f',
+					500: '#009137',
+					600: '#00742c',
+					700: '#005721',
+					800: '#003a16',
+					900: '#001d0b',
 				},
 				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))',
+					DEFAULT: '#f0fdf4',
+					foreground: '#005c25',
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
@@ -64,4 +64,9 @@ module.exports = {
 		},
 	},
 	plugins: [require('tailwindcss-animate')],
+	safelist: [
+		{
+			pattern: /mapboxgl-.+/,
+		},
+	],
 };

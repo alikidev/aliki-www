@@ -61,12 +61,10 @@ export default async function EidikiDiapaidagogisiPage() {
 
 	return (
 		<div className='container mx-auto px-4 py-8'>
-			<h1 className='text-4xl font-bold text-[#047857] mb-6'>
-				{pageData.title}
-			</h1>
+			<h1 className='text-4xl font-bold text-primary mb-6'>{pageData.title}</h1>
 
 			<div className='grid md:grid-cols-2 gap-8 items-start mb-8'>
-				<div className='prose prose-green max-w-none'>
+				<div className='prose prose-primary max-w-none'>
 					{documentToReactComponents(pageData.content.json, options)}
 				</div>
 				<div className='w-full aspect-[4/3] sticky top-8'>
@@ -83,10 +81,10 @@ export default async function EidikiDiapaidagogisiPage() {
 				</div>
 			</div>
 
-			<h2 className='text-2xl font-semibold text-[#047857] mb-4'>
+			<h2 className='text-2xl font-semibold text-primary mb-4'>
 				{pageData.secondaryTitle}
 			</h2>
-			<ul className='list-disc pl-6 text-[#065f46] mb-6 space-y-2'>
+			<ul className='list-disc pl-6 text-primary-700 mb-6 space-y-2'>
 				{pageData.bulletPoints.map((point: string, index: number) => (
 					<li
 						key={index}
@@ -97,16 +95,16 @@ export default async function EidikiDiapaidagogisiPage() {
 				))}
 			</ul>
 
-			<div className='bg-[#f0fdf4] p-6 rounded-lg mb-8'>
-				<h3 className='text-xl font-semibold text-[#047857] mb-3'>
+			<div className='bg-secondary p-6 rounded-lg mb-8'>
+				<h3 className='text-xl font-semibold text-primary mb-3'>
 					{pageData.calloutTitle}
 				</h3>
-				<p className='text-[#065f46] mb-4'>{pageData.calloutContent}</p>
+				<p className='text-primary-700 mb-4'>{pageData.calloutContent}</p>
 			</div>
 
 			<Button
 				asChild
-				className='bg-[#10b981] hover:bg-[#059669] text-white'
+				className='bg-primary hover:bg-primary-600 text-white'
 			>
 				<Link href='/contact'>{pageData.ctaText}</Link>
 			</Button>

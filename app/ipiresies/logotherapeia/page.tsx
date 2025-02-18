@@ -22,13 +22,13 @@ const options = {
 			<h3 className='text-2xl font-bold mb-2'>{children}</h3>
 		),
 		[BLOCKS.UL_LIST]: (node: any, children: any) => (
-			<ul className='list-disc list-inside mb-4'>{children}</ul>
+			<ul className='list-disc pl-6 mb-4 space-y-2'>{children}</ul>
 		),
 		[BLOCKS.OL_LIST]: (node: any, children: any) => (
 			<ol className='list-decimal pl-6 mb-4 space-y-2'>{children}</ol>
 		),
 		[BLOCKS.LIST_ITEM]: (node: any, children: any) => (
-			<li className='mb-1'>{children}</li>
+			<li className='pl-2'>{children}</li>
 		),
 		[BLOCKS.EMBEDDED_ASSET]: (node: any) => {
 			const { url, description } = node.data.target;
@@ -61,12 +61,10 @@ export default async function LogotherapeiaPage() {
 
 	return (
 		<div className='container mx-auto px-4 py-8'>
-			<h1 className='text-4xl font-bold text-[#047857] mb-6'>
-				{pageData.title}
-			</h1>
+			<h1 className='text-4xl font-bold text-primary mb-6'>{pageData.title}</h1>
 
 			<div className='grid md:grid-cols-2 gap-8 items-start mb-8'>
-				<div className='prose prose-green max-w-none'>
+				<div className='prose prose-primary max-w-none'>
 					{documentToReactComponents(pageData.content.json, options)}
 				</div>
 				<div className='w-full aspect-[4/3] sticky top-8'>
@@ -83,25 +81,30 @@ export default async function LogotherapeiaPage() {
 				</div>
 			</div>
 
-			<h2 className='text-2xl font-semibold text-[#047857] mb-4'>
+			<h2 className='text-2xl font-semibold text-primary mb-4'>
 				{pageData.secondaryTitle}
 			</h2>
-			<ul className='list-disc list-inside text-[#065f46] mb-6'>
+			<ul className='list-disc pl-6 text-primary-700 mb-6 space-y-2'>
 				{pageData.bulletPoints.map((point: string, index: number) => (
-					<li key={index}>{point}</li>
+					<li
+						key={index}
+						className='pl-2'
+					>
+						{point}
+					</li>
 				))}
 			</ul>
 
-			<div className='bg-[#f0fdf4] p-6 rounded-lg mb-8'>
-				<h3 className='text-xl font-semibold text-[#047857] mb-3'>
+			<div className='bg-secondary p-6 rounded-lg mb-8'>
+				<h3 className='text-xl font-semibold text-primary mb-3'>
 					{pageData.calloutTitle}
 				</h3>
-				<p className='text-[#065f46] mb-4'>{pageData.calloutContent}</p>
+				<p className='text-primary-700 mb-4'>{pageData.calloutContent}</p>
 			</div>
 
 			<Button
 				asChild
-				className='bg-[#10b981] hover:bg-[#059669] text-white'
+				className='bg-primary hover:bg-primary-600 text-white'
 			>
 				<Link href='/contact'>{pageData.ctaText}</Link>
 			</Button>

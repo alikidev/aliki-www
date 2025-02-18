@@ -6,7 +6,7 @@ export default function LandingPage() {
 	return (
 		<main className='flex-1'>
 			{/* Hero Section */}
-			<section className='relative bg-gradient-to-r from-[#005c25] to-[#005c25] text-white py-20 md:py-32'>
+			<section className='relative bg-gradient-to-r from-primary to-primary text-white py-20 md:py-32'>
 				<div className='container mx-auto px-4 md:px-6'>
 					<div className='flex flex-col md:flex-row items-center justify-between'>
 						<div className='md:w-1/2 mb-10 md:mb-0'>
@@ -20,13 +20,13 @@ export default function LandingPage() {
 							<Button
 								asChild
 								size='lg'
-								className='bg-white text-[#10b981] hover:bg-[#f0fdf4] rounded-full text-lg px-8 py-3'
+								className='bg-white text-primary hover:bg-secondary rounded-full text-lg px-8 py-3'
 							>
 								<Link href='#contact'>Ξεκίνα την Περιπέτειά σου!</Link>
 							</Button>
 						</div>
 						<div className='md:w-1/2'>
-							<div className='w-full h-[400px] bg-[#f0fdf4] rounded-lg shadow-xl flex items-center justify-center overflow-hidden'>
+							<div className='w-full h-[400px] bg-secondary rounded-lg shadow-xl flex items-center justify-center overflow-hidden'>
 								<img
 									src='/placeholder.svg?height=400&width=600'
 									alt='Χαρούμενα παιδιά που μαθαίνουν και παίζουν'
@@ -39,9 +39,9 @@ export default function LandingPage() {
 			</section>
 
 			{/* Services Section */}
-			<section className='py-16 bg-[#f0fdf4]'>
+			<section className='py-16 bg-secondary'>
 				<div className='container mx-auto px-4 md:px-6'>
-					<h2 className='text-3xl font-bold text-center mb-12 text-[#047857]'>
+					<h2 className='text-3xl font-bold text-center mb-12 text-primary'>
 						Οι Διασκεδαστικές μας Δραστηριότητες Μάθησης
 					</h2>
 					<div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
@@ -67,13 +67,13 @@ export default function LandingPage() {
 						].map((service, index) => (
 							<div
 								key={index}
-								className='bg-white p-6 rounded-lg shadow-md border border-[#bbf7d0] transition-transform hover:scale-105'
+								className='bg-white p-6 rounded-lg shadow-md border border-primary-100 transition-transform hover:scale-105'
 							>
-								<service.icon className='w-16 h-16 text-[#10b981] mb-4 mx-auto' />
-								<h3 className='text-xl font-semibold mb-4 text-[#047857] text-center'>
+								<service.icon className='w-16 h-16 text-primary mb-4 mx-auto' />
+								<h3 className='text-xl font-semibold mb-4 text-primary text-center'>
 									{service.title}
 								</h3>
-								<p className='text-[#065f46] text-center'>
+								<p className='text-primary-700 text-center'>
 									{service.description}
 								</p>
 							</div>
@@ -87,7 +87,7 @@ export default function LandingPage() {
 				<div className='container mx-auto px-4 md:px-6'>
 					<div className='flex flex-col md:flex-row items-center'>
 						<div className='md:w-1/2 mb-8 md:mb-0'>
-							<div className='w-full h-[400px] bg-[#f0fdf4] rounded-lg shadow-xl flex items-center justify-center overflow-hidden'>
+							<div className='w-full h-[400px] bg-secondary rounded-lg shadow-xl flex items-center justify-center overflow-hidden'>
 								<img
 									src='/placeholder.svg?height=400&width=600'
 									alt='Η φιλική μας λογοθεραπεύτρια'
@@ -96,23 +96,23 @@ export default function LandingPage() {
 							</div>
 						</div>
 						<div className='md:w-1/2 md:pl-12'>
-							<h2 className='text-3xl font-bold mb-6 text-[#047857]'>
+							<h2 className='text-3xl font-bold mb-6 text-primary'>
 								Γνώρισε τον Φιλικό σου Οδηγό
 							</h2>
-							<p className='text-[#065f46] mb-4 text-lg'>
+							<p className='text-primary-700 mb-4 text-lg'>
 								Γεια σου! Είμαι η Μαρία και λατρεύω να βοηθάω παιδιά σαν εσένα
 								να γίνουν καταπληκτικοί επικοινωνιακοί. Μαζί, θα πάμε σε
 								συναρπαστικά γλωσσικά ταξίδια γεμάτα διασκεδαστικά παιχνίδια και
 								cool δραστηριότητες!
 							</p>
-							<p className='text-[#065f46] mb-6 text-lg'>
+							<p className='text-primary-700 mb-6 text-lg'>
 								Κάθε μέρα είναι μια νέα περιπέτεια στον πολύχρωμο και
 								παιχνιδιάρικο χώρο θεραπείας μας. Είσαι έτοιμος/η να
 								ξεκλειδώσεις τις υπερδυνάμεις επικοινωνίας σου;
 							</p>
 							<Button
 								variant='outline'
-								className='text-[#10b981] border-[#10b981] hover:bg-[#f0fdf4] rounded-full text-lg px-8 py-3'
+								className='text-primary border-primary hover:bg-secondary rounded-full text-lg px-8 py-3'
 							>
 								Γνώρισε τη Μαρία
 							</Button>
@@ -122,9 +122,9 @@ export default function LandingPage() {
 			</section>
 
 			{/* Testimonials Section */}
-			<section className='py-16 bg-[#f0fdf4]'>
+			<section className='py-16 bg-secondary'>
 				<div className='container mx-auto px-4 md:px-6'>
-					<h2 className='text-3xl font-bold text-center mb-12 text-[#047857]'>
+					<h2 className='text-3xl font-bold text-center mb-12 text-primary'>
 						Τι Λένε τα Σούπερ Αστέρια μας
 					</h2>
 					<div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
@@ -142,13 +142,13 @@ export default function LandingPage() {
 						].map((testimonial, index) => (
 							<div
 								key={index}
-								className='bg-white p-6 rounded-lg shadow-md border border-[#bbf7d0]'
+								className='bg-white p-6 rounded-lg shadow-md border border-primary-100'
 							>
-								<Star className='w-8 h-8 text-[#10b981] mb-4 mx-auto' />
-								<p className='text-[#065f46] mb-4 text-lg italic text-center'>
+								<Star className='w-8 h-8 text-primary mb-4 mx-auto' />
+								<p className='text-primary-700 mb-4 text-lg italic text-center'>
 									"{testimonial.quote}"
 								</p>
-								<p className='font-semibold text-[#059669] text-center'>
+								<p className='font-semibold text-primary text-center'>
 									{testimonial.name}
 								</p>
 							</div>
@@ -158,7 +158,7 @@ export default function LandingPage() {
 			</section>
 
 			{/* Call to Action Section */}
-			<section className='py-16 bg-[#10b981] text-white'>
+			<section className='py-16 bg-primary text-white'>
 				<div className='container mx-auto px-4 md:px-6 text-center'>
 					<h2 className='text-3xl font-bold mb-6'>
 						Έτοιμος/η για τη Γλωσσική σου Περιπέτεια;
@@ -170,7 +170,7 @@ export default function LandingPage() {
 					<Button
 						asChild
 						size='lg'
-						className='bg-white text-[#10b981] hover:bg-[#f0fdf4] rounded-full text-lg px-8 py-3'
+						className='bg-white text-primary hover:bg-secondary rounded-full text-lg px-8 py-3'
 					>
 						<Link href='#contact'>Έλα στην Παρέα μας!</Link>
 					</Button>
