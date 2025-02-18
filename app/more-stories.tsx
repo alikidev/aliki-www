@@ -19,7 +19,7 @@ function PostPreview({
 	slug: string;
 }) {
 	return (
-		<div className='bg-[#f0fdf4] rounded-lg shadow-md p-6'>
+		<div className='bg-primary-50 rounded-lg shadow-md p-6'>
 			<div className='mb-5'>
 				<CoverImage
 					slug={slug}
@@ -27,7 +27,7 @@ function PostPreview({
 					url={coverImage.url}
 				/>
 			</div>
-			<h3 className='text-2xl mb-3 leading-snug font-bold text-[#047857]'>
+			<h3 className='text-2xl mb-3 leading-snug font-bold text-primary'>
 				<Link
 					href={`/posts/${slug}`}
 					className='hover:underline'
@@ -35,10 +35,10 @@ function PostPreview({
 					{title}
 				</Link>
 			</h3>
-			<div className='text-lg mb-4 text-[#065f46]'>
+			<div className='text-lg mb-4 text-primary-600'>
 				<Date dateString={date} />
 			</div>
-			<p className='text-lg leading-relaxed mb-4 text-[#065f46]'>{excerpt}</p>
+			<p className='text-lg leading-relaxed mb-4 text-primary-700'>{excerpt}</p>
 			{author && (
 				<Avatar
 					name={author.name}
@@ -59,11 +59,11 @@ export default function MoreStories({
 	return (
 		<section>
 			{showHeading && (
-				<h2 className='text-3xl font-bold text-center mb-8 text-[#047857]'>
+				<h2 className='text-3xl font-bold text-center mb-8 text-primary'>
 					More Stories
 				</h2>
 			)}
-			<div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:grid-cols-3 lg:gap-x-12 gap-y-20 md:gap-y-32 mb-32'>
+			<div className='grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-32 gap-y-20 md:gap-y-32 mb-32'>
 				{morePosts.map((post) => (
 					<PostPreview
 						key={post.slug}

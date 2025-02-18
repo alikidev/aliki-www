@@ -22,14 +22,14 @@ export default async function PostPage({
 
 		if (!post) {
 			return (
-				<div className='text-center text-[#065f46] text-xl'>Post not found</div>
+				<div className='text-center text-primary text-xl'>Post not found</div>
 			);
 		}
 
 		return (
 			<div className='container mx-auto px-5'>
 				<article className='bg-white rounded-lg shadow-lg p-6 mb-12'>
-					<h1 className='mb-8 text-4xl md:text-5xl font-bold leading-tight tracking-tighter text-center text-[#047857]'>
+					<h1 className='mb-8 text-4xl md:text-5xl font-bold leading-tight tracking-tighter text-center text-primary'>
 						{post.title}
 					</h1>
 
@@ -49,19 +49,19 @@ export default async function PostPage({
 								/>
 							)}
 						</div>
-						<div className='mb-6 text-lg text-center text-[#065f46]'>
+						<div className='mb-6 text-lg text-center text-primary-600'>
 							<Date dateString={post.date} />
 						</div>
 					</div>
 
 					<div className='mx-auto max-w-2xl'>
-						<div className='prose prose-green'>
+						<div className='prose prose-primary'>
 							<Markdown content={post.content} />
 						</div>
 					</div>
 				</article>
 
-				<hr className='border-[#bbf7d0] my-12' />
+				<hr className='border-primary-200 my-12' />
 
 				{morePosts.length > 0 && (
 					<MoreStories
@@ -74,7 +74,7 @@ export default async function PostPage({
 	} catch (error) {
 		console.error('Error rendering post page:', error);
 		return (
-			<div className='text-center text-[#065f46] text-xl'>
+			<div className='text-center text-primary text-xl'>
 				Error loading the post. Please try again later.
 			</div>
 		);
